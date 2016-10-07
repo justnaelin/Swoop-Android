@@ -28,7 +28,7 @@ public interface VehicleService {
      * @param vehicle The vehicle will be retrieved from the DB.
      * @return The success or failure of deleting vehicle.
      */
-    boolean deleteVehicle(Vehicle vehicle);
+    boolean deleteVehicle(String vehicleId);
 
     /**
      * User is able to look for vehicle by userID.
@@ -36,13 +36,13 @@ public interface VehicleService {
      * @return A Vehicle that belongs to the userID entered.
      *
      */
-    Vehicle getVehicleByUserID(int userID);
+    Vehicle getVehicleByUserId(String userId);
 
     /** Users will be able to filter Swoops by number of seats needed.
      * @param num_seats The number of seats will be extracted from DB.
      * @return ArrayList of vehicles that have the number amount of seats entered.
      */
-    ArrayList<Vehicle> getVehiclesByNumberSeats(int num_seats);
+    ArrayList<Vehicle> getVehiclesByNumberSeats(int numberOfSeats);
 
     /**
      * Users will be able to filter Vehicles by model, to drive in luxury.
