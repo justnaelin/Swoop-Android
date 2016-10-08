@@ -15,6 +15,8 @@ import com.amazonaws.services.dynamodbv2.*;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.mapping.Carpool;
+import com.mapping.User;
+import com.mapping.Notification;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 Regions.US_WEST_2 // Region
         );
 
-
         //Instantiate a DynamoDB client using the credentialsProvider
         ddbClient = new AmazonDynamoDBClient(credentialsProvider);
 
@@ -46,31 +47,40 @@ public class MainActivity extends AppCompatActivity {
         //DynamoDB Object Mapper to map a client-side class to our database
         mapper = new DynamoDBMapper(ddbClient);
 
-
         databaseButon = (Button) findViewById(R.id.databaseButton);
         databaseButon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
-                databaseConnenction(v);
+                databaseConnection(v);
             }
         });
     }
 
-    public void databaseConnenction(View v){
+    public void databaseConnection(View v){
 
         Context context = v.getContext();
         Toast.makeText(context, "Button was clicked", Toast.LENGTH_SHORT).show();
-
 
         final Runnable runnable = new Runnable() {
             public void run() {
                 //DynamoDB calls go here
                 Log.d("MainActivity", "Inside new Runnable Thread");
 
+                User user1 = new User();
+                user1.setUserId("0119");
+                user1.setAverageRating(22.5);
+                user1.setBirthday("02/10/1994");
+                user1.setName("Ana");
+                user1.setLastName("Perez");
+                user1.setPhoneNumber("8317376598");
+                mapper.save(user1);
 
-                Carpool carRetrieved = mapper.load(Carpool.class, "123A");//retreived car with id 123A
-                Log.d("MainActivity", "ID: " + carRetrieved.getId() + " " + carRetrieved.getRate());
+               // Carpool carRetrieved = mapper.load(Carpool.class, "123A");//retrieved car with id 123A
+               // User userRetrieved = mapper.load(User.class, "1234"); //retrieved user with id 1234
+                //Notification notificationRetrieved = mapper.load(Notification.class, "1237");
+               // Log.d("MainActivity", "ID: " + carRetrieved.getId() + " " + carRetrieved.getRate());
+                //Log.d("MainActivity", "ID: " + notificationRetrieved.getNotificationId() + " " + notificationRetrieved.getCarpoolId());
+               // Log.d("MainActivity", "ID: " + userRetrieved.getUserId() +  " " + userRetrieved.getBirthday());
 
             }
         };

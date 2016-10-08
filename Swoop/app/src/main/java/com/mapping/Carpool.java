@@ -4,7 +4,9 @@ package com.mapping;
  * Created by ychino on 10/4/16.
  */
 
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
 
 @DynamoDBTable(tableName = "Carpool")
 public class Carpool {
@@ -50,8 +52,5 @@ public class Carpool {
     @DynamoDBAttribute(attributeName="isDeleted")
     public Boolean getIsDeleted() {return isDeleted;}
     public void setIsDeleted(Boolean deleted) {isDeleted = deleted;}
-
-
-
 
 }
