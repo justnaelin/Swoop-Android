@@ -18,14 +18,14 @@ public interface VehicleService {
 
     /**
      * User will be able to update their vehicle.
-     * @param vehicle The Vehicle object will be created by user.
+     * @param vehicle The Vehicle object will be retrieved from DB.
      * @return The success or failure of updating a vehicle.
      */
     boolean updateVehicle(Vehicle vehicle);
 
     /**
      * User will be able to delete a registered vehicle.
-     * @param vehicle The vehicle will be retrieved from the DB.
+     * @param vehicleId The vehicle will be retrieved from the DB.
      * @return The success or failure of deleting vehicle.
      */
     boolean deleteVehicle(String vehicleId);
@@ -39,16 +39,18 @@ public interface VehicleService {
     Vehicle getVehicleByUserId(String userId);
 
     /** Users will be able to filter Swoops by number of seats needed.
-     * @param num_seats The number of seats will be extracted from DB.
+     * @param numberOfSeats The number of seats will be extracted from DB.
      * @return ArrayList of vehicles that have the number amount of seats entered.
      */
     ArrayList<Vehicle> getVehiclesByNumberSeats(int numberOfSeats);
 
     /**
      * Users will be able to filter Vehicles by model, to drive in luxury.
-     * @param model Model will be extracted from the DB.
+     * @param model Vehicle Models will be extracted from the DB.
      * @return ArrayList of vehicles with model entered.
      */
+
+    ArrayList<Vehicle> getVehiclesByModel(String model);
 
 
 }
