@@ -15,6 +15,7 @@ import com.amazonaws.services.dynamodbv2.*;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.mapping.Carpool;
+import com.mapping.Review;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -68,9 +69,12 @@ public class MainActivity extends AppCompatActivity {
                 //DynamoDB calls go here
                 Log.d("MainActivity", "Inside new Runnable Thread");
 
-
                 Carpool carRetrieved = mapper.load(Carpool.class, "123A");//retreived car with id 123A
                 Log.d("MainActivity", "ID: " + carRetrieved.getId() + " " + carRetrieved.getRate());
+
+                Review reviewRetrieved = mapper.load(Review.class, "123A");//retreived car with id 123A
+                Log.d("MainActivity", "ID: " + reviewRetrieved.getRevieweeId() + " " + reviewRetrieved.getComments());
+
 
             }
         };
