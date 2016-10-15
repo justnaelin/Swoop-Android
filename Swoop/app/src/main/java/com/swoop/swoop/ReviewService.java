@@ -1,5 +1,7 @@
 package com.swoop.swoop;
 
+import com.mapping.Review;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,7 +18,7 @@ public interface ReviewService {
      * @return Success or failure of creating new review.
      */
 
- //   boolean createReview(Review review);
+    boolean createReview(Review review);
 
     /**
      * Updates a review and the DB, if exists.
@@ -24,7 +26,7 @@ public interface ReviewService {
      * @return Success or failure of creating a review.
      */
 
-  //  boolean updateReview(Review review);
+    boolean updateReview(Review review);
 
     /**
      * Deletes a review from the DB.
@@ -40,7 +42,7 @@ public interface ReviewService {
      * @return A Review or NULL.
      */
 
-  //  Review getReviewByReviewID(int reviewID);
+     Review getReviewByReviewID(int reviewID);
 
     /**
      * Gets all reviews by UserID fromt he DB.
@@ -48,7 +50,7 @@ public interface ReviewService {
      * @return List of all reviews from the userID.
      */
 
-//    ArrayList<Review> getReviewsByUserID(int userID);
+    ArrayList<Review> getReviewsByUserID(int userID);
 
     /**
      * Gets all reviews by a specific date.
@@ -56,6 +58,6 @@ public interface ReviewService {
      * @return List of all reviews at that specific date.
      */
 
-  //  ArrayList<Review> getReviewsByDate(Date timestamp);
+    ArrayList<Review> getReviewsByDate(Date timestamp);
 }
 

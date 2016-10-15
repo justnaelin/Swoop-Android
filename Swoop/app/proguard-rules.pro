@@ -15,3 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+# class:
+ -keep public class com.mapping.User {
+     *;
+ }

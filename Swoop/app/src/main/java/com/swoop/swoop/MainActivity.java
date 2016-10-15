@@ -1,5 +1,6 @@
 package com.swoop.swoop;
 
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         createSwoopImageButton = (ImageButton) findViewById(R.id.createSwoopButton);
         createSwoopImageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -28,4 +28,5 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
 
     }
+
 }
