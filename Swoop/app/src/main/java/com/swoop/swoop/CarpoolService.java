@@ -1,6 +1,8 @@
 package com.swoop.swoop;
 
 import java.util.ArrayList;
+import com.mapping.Carpool;
+import com.mapping.CarpoolStatus;
 
 /**
  * Carpool Service Interface

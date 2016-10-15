@@ -1,6 +1,6 @@
 package com.swoop.swoop;
 
-import java.util.ArrayList;
+import com.mapping.Review;
 import java.util.Date;
 
 /**
@@ -48,7 +48,7 @@ public interface ReviewService {
      * @return List of all reviews from the userID.
      */
 
-    ArrayList<Review> getReviewsByUserID(int userID);
+   // ArrayList<Review> getReviewsByUserID(int userID);
 
     /**
      * Gets all reviews by a specific date.
@@ -56,6 +56,6 @@ public interface ReviewService {
      * @return List of all reviews at that specific date.
      */
 
-    ArrayList<Review> getReviewsByDate(Date timestamp);
+  //  ArrayList<Review> getReviewsByDate(Date timestamp);
 }
 
