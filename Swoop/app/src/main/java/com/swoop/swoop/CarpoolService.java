@@ -17,7 +17,7 @@ public interface CarpoolService {
      * @return The success or failure of creating the object
      *
      */
-    boolean createCarpool(Carpool carpool);
+  //  boolean createCarpool(Carpool carpool);
 
     /**
      * Updates a Carpool object in our database
@@ -25,7 +25,7 @@ public interface CarpoolService {
      * @return The success or failure of updating the object
      *
      */
-    boolean updateCarpool(Carpool carpool);
+  //  boolean updateCarpool(Carpool carpool);
 
     /**
      * Deletes a Carpool object in our database
@@ -33,7 +33,7 @@ public interface CarpoolService {
      * @return The success or failure of deleting the object
      *
      */
-    boolean deleteCarpool(int carpoolId);
+   // boolean deleteCarpool(int carpoolId);
 
     /**
      * Gets all Carpools by a user's ID
@@ -41,7 +41,7 @@ public interface CarpoolService {
      * @return A list of Carpools corresponding to the given user ID
      *
      */
-    ArrayList<Carpool> getCarpoolsByUserId(int userId);
+   // ArrayList<Carpool> getCarpoolsByUserId(int userId);
 
     /**
      * Gets all Carpools by the start location of the Carpool
@@ -49,7 +49,7 @@ public interface CarpoolService {
      * @return A list of Carpools corresponding to the given start location
      *
      */
-    ArrayList<Carpool> getCarpoolsByStartLocation(String startLocation);
+  //  ArrayList<Carpool> getCarpoolsByStartLocation(String startLocation);
 
     /**
      * Gets all Carpools by the end location of the Carpool
@@ -57,7 +57,7 @@ public interface CarpoolService {
      * @return A list of Carpools corresponding to the given end location
      *
      */
-    ArrayList<Carpool> getCarpoolsByEndLocation(String endLocation);
+    //ArrayList<Carpool> getCarpoolsByEndLocation(String endLocation);
 
     /**
      * Gets all Carpools by completion status (e.g. completed/not completed)
@@ -65,7 +65,7 @@ public interface CarpoolService {
      * @return A list of Carpools corresponding to the given completion status
      *
      */
-    ArrayList<Carpool> getCarpoolsByCompletionStatus(boolean isCompleted);
+   // ArrayList<Carpool> getCarpoolsByCompletionStatus(boolean isCompleted);
 
     /**
      * Gets all Carpools by deletion status (e.g. deleted/not deleted)
@@ -73,7 +73,7 @@ public interface CarpoolService {
      * @return A list of Carpools corresponding to the given deletion status
      *
      */
-    ArrayList<Carpool> getCarpoolsByDeletionStatus(boolean isDeleted);
+   // ArrayList<Carpool> getCarpoolsByDeletionStatus(boolean isDeleted);
 
     /**
      * Gets all Carpools by Carpool status
@@ -81,7 +81,7 @@ public interface CarpoolService {
      * @return A list of Carpools corresponding to the given Carpool status
      *
      */
-    ArrayList<Carpool> getCarpoolsByStatus(CarpoolStatus carpoolStatus);
+    //ArrayList<Carpool> getCarpoolsByStatus(CarpoolStatus carpoolStatus);
 
     /**
      * Gets all Carpools by start location within specified mile radius
@@ -90,7 +90,7 @@ public interface CarpoolService {
      * @return A list of Carpools corresponding to the given start location and mile radius
      *
      */
-    ArrayList<Carpool> getCarpoolsByStartLocationAndRadius(String startLocation, double distance);
+   // ArrayList<Carpool> getCarpoolsByStartLocationAndRadius(String startLocation, double distance);
 
     /**
      * Gets all Carpools by end location within specified mile radius
@@ -99,7 +99,6 @@ public interface CarpoolService {
      * @return A list of Carpools corresponding to the given end location and mile radius
      *
      */
-    ArrayList<Carpool> getCarpoolsByEndLocationAndRadius(String endLocation, double distance);
-
+    //ArrayList<Carpool> getCarpoolsByEndLocationAndRadius(String endLocation, double distance);
 }
 
