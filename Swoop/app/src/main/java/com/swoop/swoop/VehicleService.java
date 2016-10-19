@@ -1,5 +1,9 @@
 package com.swoop.swoop;
 
+import com.mapping.Vehicle;
+
+import java.util.ArrayList;
+
 /**
  * @author karinapizano
  * @version 1.0
@@ -16,7 +20,7 @@ public interface VehicleService {
 
     /**
      * User will be able to update their vehicle.
-     * @param vehicle The Vehicle object will be created by user.
+     * @param vehicle The Vehicle object will be retrieved from DB.
      * @return The success or failure of updating a vehicle.
      */
     boolean updateVehicle(Vehicle vehicle);
@@ -44,9 +48,11 @@ public interface VehicleService {
 
     /**
      * Users will be able to filter Vehicles by model, to drive in luxury.
-     * @param model Model will be extracted from the DB.
+     * @param model Vehicle Models will be extracted from the DB.
      * @return ArrayList of vehicles with model entered.
      */
+
+    ArrayList<Vehicle> getVehiclesByModel(String model);
 
 
 }
