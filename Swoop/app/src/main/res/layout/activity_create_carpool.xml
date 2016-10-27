@@ -10,55 +10,183 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.swoop.swoop.CreateCarpoolActivity">
 
-    <EditText android:id="@+id/enter_destination"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_destination"
-        android:layout_below="@+id/enter_location"
-        android:paddingBottom="30px"/>
-
-    <EditText android:id="@+id/enter_date"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_date"
-        android:layout_below="@+id/enter_destination"
-        android:paddingBottom="30px"/>
-
-    <EditText android:id="@+id/enter_price"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_price"
-        android:layout_below="@+id/enter_date"
-        android:paddingBottom="30px"/>
-
-    <EditText android:id="@+id/enter_max_people"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_max_people"
-        android:layout_below="@+id/enter_price"
-        android:paddingBottom="30px"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_send"
+        android:text="@string/submit_button"
         android:layout_marginBottom="28dp"
+        android:padding="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/submit_button"
+        android:background="@drawable/rounded_corners"
+        />
 
-    <EditText android:id="@+id/enter_location"
-        android:layout_weight="1"
+    <!--One outer main liner layout that contains both the text and input linear layout-->
+    <LinearLayout
+        android:id="@+id/outer_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_location"
-        android:paddingBottom="30px"
-        android:paddingTop="30px"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true">
 
+
+        <!--Two inner liner layout: 1st for text descriptions-->
+        <LinearLayout
+            android:id="@+id/left_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical">
+
+            <TextView
+            android:id="@+id/text_input_location"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_input_location"
+            android:textSize="10pt"
+            android:paddingTop="7pt"/>
+
+            <TextView
+                android:id="@+id/text_input_destination"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_input_destination"
+                android:textSize="10pt"
+                android:paddingTop="7pt"/>
+
+
+            <TextView
+                android:id="@+id/text_input_max_people"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_input_max_people"
+                android:textSize="10pt"
+                android:paddingTop="7pt"/>
+
+            <TextView
+                android:id="@+id/text_input_rate"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_input_rate"
+                android:textSize="10pt"
+                android:paddingTop="7pt"/>
+
+
+            <TextView
+                android:id="@+id/text_user_type"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_input_user"
+                android:textSize="10pt"
+                android:paddingTop="7pt"/>
+
+            <Button
+                android:id="@+id/button_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:paddingLeft="1pt"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_corners"
+                />
+
+            <Button
+                android:id="@+id/button_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_corners"
+                />
+
+
+
+        </LinearLayout>
+
+        <!--Two inner liner layout: 2st for text input-->
+        <LinearLayout
+            android:id="@+id/input_linear_layout"
+            android:paddingLeft="10pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical">
+
+
+            <EditText android:id="@+id/input_location"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_location" />
+
+            <EditText android:id="@+id/input_destination"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_destination" />
+
+            <EditText android:id="@+id/input_max_people"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/hint_max_people" />
+
+            <EditText android:id="@+id/input_rate"
+                android:inputType="numberDecimal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_rate"/>
+
+            <!--Radio Buttons for Driver or Passanger-->
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5pt">
+
+                <RadioButton android:id="@+id/radio_driver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/driver_radio_button"/>
+
+                <RadioButton android:id="@+id/radio_passanger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/passanger_radio_button" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/in_date"
+                android:textSize="9pt"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/in_time"
+                android:textSize="9pt"
+                android:layout_marginTop="15dp"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

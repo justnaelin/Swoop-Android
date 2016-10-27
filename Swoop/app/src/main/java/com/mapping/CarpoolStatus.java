@@ -7,8 +7,18 @@ package com.mapping;
  * Status of a Carpool
  */
 public enum CarpoolStatus {
-    COMPLETED,
-    PENDING,
-    REQUESTED,
-    ACCEPTED;
+    PENDING("Pending"),
+    APPROVED("Approved"),
+    DENIED("Denied"),
+    REQUESTED("Requested");
+
+    private final String fieldDescription;
+
+    private CarpoolStatus(String value) {
+        fieldDescription = value;
+    }
+
+    public String getFieldDescription() {
+        return "";
+    }
 }

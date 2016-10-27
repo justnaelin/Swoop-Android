@@ -1,8 +1,9 @@
 package com.mapping;
-
 /**
- * Created by ychino on 10/6/16.
- * Vehicle Mapper
+ * Vehicle
+ *
+ * @author Yarely Chino
+ * @version 1.0
  */
 
 public class Vehicle {

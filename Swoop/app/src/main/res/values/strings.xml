@@ -1,12 +1,46 @@
 <resources>
     <string name="app_name">Swoop</string>
-    <string name="create_swoop">Create Swoop</string>
+    <string name="create_carpool_name">Create Carpool</string>
 
-    <string name="hint_location">Location</string>
-    <string name="hint_destination">Destination</string>
-    <string name="hint_date">Date</string>
-    <string name="hint_price">Price</string>
-    <string name="hint_max_people">Max people</string>
-    <string name="create_swoope">Create Swoop</string>
-    <string name="button_send">Enter</string>
+    <!--Create Carpool Layout-->
+    <string name="hint_location">123 Street, Salinas CA</string>
+    <string name="hint_destination">345 Street, Salinas CA</string>
+    <string name="hint_date">2/3/2015</string>
+    <string name="hint_rate">14.5</string>
+    <string name="hint_max_people">6</string>
+
+    <string name="text_input_location">Location: </string>
+    <string name="text_input_destination">Destination: </string>
+    <string name="text_input_date">Date: </string>
+    <string name="text_input_rate">Rate: </string>
+    <string name="text_input_max_people">Max people: </string>
+    <string name="text_input_user">User: </string>
+
+    <string name="submit_button">Create Carpool</string>
+    <string name="driver_radio_button">Driver </string>q
+    <string name="passanger_radio_button">Passanger</string>
+
+
+    <!--Drawer Layout-->
+    <string name="text_edit_profile">Edit Profile</string>
+
+    <!--Drawer List-->
+    <string name="drawer_list_title_0">Home</string>
+    <string name="drawer_list_title_1">My Swoops</string>
+    <string name="drawer_list_title_2">Bank Account</string>
+    <string name="drawer_list_title_3">Add Vehicles</string>
+    <string name="drawer_list_title_4">Log Out</string>
+
+    <string name="drawer_list_description_0">Main page</string>
+    <string name="drawer_list_description_1">View swoops</string>
+    <string name="drawer_list_description_2">Edit bank information</string>
+    <string name="drawer_list_description_3">Edit information</string>
+    <string name="drawer_list_description_4"></string>
+
+
+
+
+
+
+
 </resources>

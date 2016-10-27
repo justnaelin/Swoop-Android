@@ -2,9 +2,12 @@ package com.mapping;
 
 
 /**
- * Created by ychino on 10/6/16.
- * Review Mapper
+ * Review
+ *
+ * @author Yarely Chino
+ * @version 1.0
  */
+
 public class Review {
 
     private String reviewId;
