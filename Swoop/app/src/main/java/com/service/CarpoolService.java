@@ -29,7 +29,7 @@ public class CarpoolService {
     public static final String END_LOCATION = "endLocation";
     public static final String REQUEST_DATE = "requestDate";
     public static final String RATE = "rate";
-    public static final String NUMBER_OF_PASSANGERS = "numberOfPassangers";
+    public static final String NUMBER_OF_PASSENGERS = "numberOfPassengers";
     public static final String CARPOOL_STATUS = "carpoolStatus";
     public static final String IS_COMPLETED = "isCompleted";
     public static final String IS_DELETED = "isDeleted";
@@ -100,7 +100,7 @@ public class CarpoolService {
             params.put(END_LOCATION, endLocation);
             params.put(REQUEST_DATE, requestDate);
             params.put(RATE, rate);
-            params.put(NUMBER_OF_PASSANGERS, numberOfPassengers);
+            params.put(NUMBER_OF_PASSENGERS, numberOfPassengers);
             params.put(CARPOOL_STATUS, carpoolStatus);
             params.put(IS_DRIVER, isDriver);
             params.put(IS_COMPLETED, false);

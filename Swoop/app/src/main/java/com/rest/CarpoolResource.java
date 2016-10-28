@@ -20,17 +20,17 @@ import cz.msebera.android.httpclient.Header;
 
 public class CarpoolResource {
 
-    ResponseHandlerInterface fad = new AsyncHttpResponseHandler();
+//    ResponseHandlerInterface fad = new AsyncHttpResponseHandler();
 
     private static ResponseHandlerInterface executeCreateResponseHandler() {
         return new AsyncHttpResponseHandler() {
 
-           // @Override
+//            @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.d("CreateCarpoolActivity", "Response create code" + statusCode + " " + new String(responseBody));
             }
 
-           // @Override
+//           @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d("CreateCarpoolActivity", "Response create error code" + statusCode + " " + new String(responseBody) + " after the body");
             }
@@ -40,12 +40,12 @@ public class CarpoolResource {
     private static ResponseHandlerInterface executeReadResponseHandler() {
         return new AsyncHttpResponseHandler() {
 
-            //@Override
+//            @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.d("CreateCarpoolActivity", "Response Read code" + statusCode + " " + new String(responseBody) + " after body ");
             }
 
-           // @Override
+//            @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d("CreateCarpoolActivity", "Response error Read code");
             }
@@ -56,12 +56,12 @@ public class CarpoolResource {
     private static ResponseHandlerInterface executeUpdateResponseHandler() {
         return new AsyncHttpResponseHandler() {
 
-           // @Override
+//           @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.d("CreateCarpoolActivity", "Response Update code" + statusCode + " " + new String(responseBody));
             }
 
-          //  @Override
+//          @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d("CreateCarpoolActivity", "Response error Update code");
             }
@@ -71,12 +71,11 @@ public class CarpoolResource {
     private static ResponseHandlerInterface executeDeleteResponseHandler() {
         return new AsyncHttpResponseHandler() {
 
-          //  @Override
+//           @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.d("CreateCarpoolActivity", "Response Delete code" + statusCode + " " + new String(responseBody));
             }
-
-          //  @Override
+//            @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d("CreateCarpoolActivity", "Response DELETE error code" + statusCode + " " + new String(responseBody) + " after the body");
             }
