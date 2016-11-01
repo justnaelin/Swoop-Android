@@ -1,3 +1,10 @@
+.idea 
+
+.idea/libraries
+
+#Swoop/.idea/workspace.xml
+.idea/workspace.xml
+
 # Built application files
 *.apk
 *.ap_
@@ -34,8 +41,9 @@ captures/
 
 # Intellij
 *.iml
-Swoop/.idea/workspace.xml
-**.idea/
 
 # Keystore files
 *.jks
+
+# OSX files
+.DS_Store
