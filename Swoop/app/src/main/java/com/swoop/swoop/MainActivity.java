@@ -107,8 +107,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 createToast("Notification button was clicked");
                 break;
             case R.id.new_swoops_button:
-                createToast("New Swoop button was clicked");
-                break;
+                //createToast("New Swoop button was clicked");
+                //break;
+                Intent map_intent = new Intent(v.getContext(), CarpoolDetailPageActivity.class);
+                startActivity(map_intent);
 
         }
 
