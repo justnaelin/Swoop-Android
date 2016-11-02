@@ -19,6 +19,16 @@ android {
     }
 }
 
+buildscript {
+    repositories {
+        maven { url 'http://repo1.maven.org/maven2' }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -30,4 +40,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.8.0'
     compile 'com.google.android.gms:play-services:4.2.+'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.7'
 }

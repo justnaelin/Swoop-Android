@@ -8,7 +8,7 @@ package com.rest;
  */
 
 
-public class NotificationResource {
+public final class NotificationResource {
 
     private String DRIVER_ID = "driverId";
     private String PASSANGER_ID = "passengerId";

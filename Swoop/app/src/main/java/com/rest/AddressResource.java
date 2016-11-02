@@ -8,7 +8,7 @@ package com.rest;
  */
 
 
-public class AddressResource {
+public final class AddressResource {
 
     public static final String STREET = "street";
     public static final String CITY = "city";

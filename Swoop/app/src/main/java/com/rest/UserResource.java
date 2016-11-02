@@ -8,7 +8,7 @@ package com.rest;
  */
 
 
-public class UserResource {
+public final class UserResource {
 
     public static final String USER_ID = "userId";
     public static final String NAME = "name";

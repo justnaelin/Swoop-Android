@@ -7,7 +7,7 @@ package com.rest;
  * @version 1.0
  */
 
-public class InputUtility {
+public final class InputUtility {
 
     /**
      * Checks if string is Null

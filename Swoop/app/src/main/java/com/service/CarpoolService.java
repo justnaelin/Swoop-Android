@@ -38,7 +38,8 @@ public class CarpoolService {
     public static final String CREATE_END_POINT = "http://10.0.2.2:8080/rest/carpool/create";
     public static final String UPDATE_END_POINT = "http://10.0.2.2:8080/rest/carpool/update";
     public static final String DELETE_END_POINT = "http://10.0.2.2:8080/rest/carpool/delete";
-
+    public static final String RETRIEVE_BY_USER_END_POINT = "http://10.0.2.2:8080/rest/carpool/userId";
+    public static final String VALID = "VALID";
 
     public static boolean createCarpool(Carpool carpool) {
 
@@ -85,12 +86,12 @@ public class CarpoolService {
         return null;
     }
 
-    public static void verifyCreate(String carpoolId, String userId, String startLocation,
+    public static String verifyCreate(String carpoolId, String userId, String startLocation,
                                     String endLocation, String requestDate, String rate,
                                     String numberOfPassengers, CarpoolStatus carpoolStatus,
-                                    boolean isDriver,
-                                    Context context) {
-        if (validateCreate(rate, numberOfPassengers, carpoolStatus, context)) {
+                                    boolean isDriver) {
+        String validateResponse = validateCreate(rate, numberOfPassengers, carpoolStatus);
+        if (validateResponse.equals(VALID)) {
 
             RequestParams params = new RequestParams();
 
@@ -109,6 +110,7 @@ public class CarpoolService {
             CarpoolResource.createRequest(params);
 
         }
+        return validateResponse;
     }
 
 
@@ -117,11 +119,10 @@ public class CarpoolService {
      *
      * @return true if all information is valid, false if there is invalid information.
      */
-    private static boolean validateCreate(String carpoolId, String userId, String startLocation,
+    private static String validateCreate(String carpoolId, String userId, String startLocation,
                                           String endLocation, String requestDate, String rate,
                                           String numberOfPassengers, CarpoolStatus carpoolStatus,
-                                          boolean isDriver,
-                                          Context context) {
+                                          boolean isDriver) {
 
         if (InputUtility.isNotNull(carpoolId) &&
                 InputUtility.isNotNull(userId) &&
@@ -132,62 +133,53 @@ public class CarpoolService {
             try {
                 Integer.valueOf(numberOfPassengers);
             } catch (NumberFormatException e) {
-                createToast(context, "Please, enter a valid passanger number");
-                return false;
+                return "Please, enter a valid passanger number";
+
             }
 
             try {
                 Double.valueOf(rate);
+                return VALID;
 
             } catch (NumberFormatException e) {
-                createToast(context, "Please, enter a valid rate value");
-                return false;
+                return "Please, enter a valid rate value";
             }
 
         }
 
-        createToast(context, "Please enter all fields");
-        return false;
+       return "Please enter all fields";
     }
 
 
     /**
      * Checks for input carpool validation for only rate, numberOfPassangers
      *
-     * @return true if all information is valid, false if there is invalid information.
+     * @return a string validation message, if all information is valid or invalid.
      */
-    private static boolean validateCreate(String rate,
+    private static String validateCreate(String rate,
                                           String numberOfPassengers,
-                                          CarpoolStatus carpoolStatus,
-                                          Context context) {
+                                          CarpoolStatus carpoolStatus) {
 
         if (carpoolStatus.toString() == CarpoolStatus.PENDING.toString()) {
 
             try {
                 Integer.valueOf(numberOfPassengers);
             } catch (NumberFormatException e) {
-                createToast(context, "Please, enter a valid passanger number");
-                return false;
+                return "Please, enter a valid passenger number";
             }
 
             try {
                 Double.valueOf(rate);
-                return true;
+                return VALID;
 
             } catch (NumberFormatException e) {
-                createToast(context, "Please, enter a valid rate value");
-                return false;
+                return "Please, enter a valid rate value";
             }
 
         }
-        return false;
+        return "Invalid carpool status";
     }
 
-
-    public static void createToast(Context context, String s) {
-        Toast toast = Toast.makeText(context, s, Toast.LENGTH_SHORT);
-        toast.show();
-    }
 
 
 }

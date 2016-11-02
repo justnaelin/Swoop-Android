@@ -8,7 +8,7 @@ package com.rest;
  */
 
 
-public class ReviewResource {
+public final class ReviewResource {
 
     public static final String REVIEW_ID = "reviewId";
     public static final String COMMENTS = "comments";

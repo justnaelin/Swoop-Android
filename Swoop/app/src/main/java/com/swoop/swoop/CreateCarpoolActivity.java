@@ -159,15 +159,20 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
 
                 //Service will verify any information :
                 // TODO: check if you can do this in a different thread
+
                 if (checkEmptyFields()) {
-                    CarpoolService.verifyCreate("123097", "23334",
+                    String response = CarpoolService.verifyCreate("123097", "23334",
                             mInputLocation.getText().toString(),
                             mInputDestination.getText().toString(),
                             mTxtDate.getText().toString() + " , " + mTxtTime.getText().toString(),
                             mInputRate.getText().toString(),
                             mInputMaxPeople.getText().toString(),
                             CarpoolStatus.PENDING,
-                            isDriver, getApplicationContext());
+                            isDriver);
+                    if (!response.equals(CarpoolService.VALID)) {
+                        //Check if return response is valid
+                        createToast(response);
+                    }
                 }
                 break;
             case R.id.radio_passanger:

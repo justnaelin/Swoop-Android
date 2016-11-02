@@ -18,66 +18,19 @@ import cz.msebera.android.httpclient.Header;
  */
 
 
-public class CarpoolResource {
-
-//    ResponseHandlerInterface fad = new AsyncHttpResponseHandler();
-
-    private static ResponseHandlerInterface executeCreateResponseHandler() {
-        return new AsyncHttpResponseHandler() {
-
-//            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d("CreateCarpoolActivity", "Response create code" + statusCode + " " + new String(responseBody));
-            }
-
-//           @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("CreateCarpoolActivity", "Response create error code" + statusCode + " " + new String(responseBody) + " after the body");
-            }
-        };
-    }
-
-    private static ResponseHandlerInterface executeReadResponseHandler() {
-        return new AsyncHttpResponseHandler() {
-
-//            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d("CreateCarpoolActivity", "Response Read code" + statusCode + " " + new String(responseBody) + " after body ");
-            }
-
-//            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("CreateCarpoolActivity", "Response error Read code");
-            }
-        };
-    }
+public final class CarpoolResource {
 
 
-    private static ResponseHandlerInterface executeUpdateResponseHandler() {
+    private static ResponseHandlerInterface executeResponseHandler() {
         return new AsyncHttpResponseHandler() {
 
 //           @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d("CreateCarpoolActivity", "Response Update code" + statusCode + " " + new String(responseBody));
-            }
-
-//          @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("CreateCarpoolActivity", "Response error Update code");
-            }
-        };
-    }
-
-    private static ResponseHandlerInterface executeDeleteResponseHandler() {
-        return new AsyncHttpResponseHandler() {
-
-//           @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d("CreateCarpoolActivity", "Response Delete code" + statusCode + " " + new String(responseBody));
+                Log.d("CreateCarpoolActivity", "Response code" + statusCode + " " + new String(responseBody));
             }
 //            @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("CreateCarpoolActivity", "Response DELETE error code" + statusCode + " " + new String(responseBody) + " after the body");
+                Log.d("CreateCarpoolActivity", "Response error code" + statusCode + " " + new String(responseBody) + " after the body");
             }
         };
     }
@@ -91,7 +44,7 @@ public class CarpoolResource {
         params.put(CarpoolService.CARPOOL_ID, id);
 
         //RETREIVE REQUEST
-        client.get(CarpoolService.RETRIEVE_END_POINT, params, CarpoolResource.executeReadResponseHandler());
+        client.get(CarpoolService.RETRIEVE_END_POINT, params, CarpoolResource.executeResponseHandler());
     }
 
 
@@ -104,7 +57,7 @@ public class CarpoolResource {
         params.put(CarpoolService.CARPOOL_ID, id);
 
         //DELETE REQUEST
-        client.get(CarpoolService.DELETE_END_POINT, params, CarpoolResource.executeDeleteResponseHandler());
+        client.get(CarpoolService.DELETE_END_POINT, params, CarpoolResource.executeResponseHandler());
     }
 
 
@@ -123,7 +76,7 @@ public class CarpoolResource {
         //retreiveRequest("123456"); check if endpoint retreive works
 
         //CREATE REQUEST
-        client.get(CarpoolService.CREATE_END_POINT, params, CarpoolResource.executeCreateResponseHandler());
+        client.get(CarpoolService.CREATE_END_POINT, params, CarpoolResource.executeResponseHandler());
     }
 
     /**
@@ -135,7 +88,19 @@ public class CarpoolResource {
         AsyncHttpClient client = new AsyncHttpClient();
 
         //UPDATE REQUEST
-        client.get(CarpoolService.UPDATE_END_POINT, params, CarpoolResource.executeUpdateResponseHandler());
+        client.get(CarpoolService.UPDATE_END_POINT, params, CarpoolResource.executeResponseHandler());
+    }
+
+    /**
+     * Performs the request call to access the retrieve by user UPDATE endpoint.
+     */
+    public static void retrieveByUser(RequestParams params) {
+
+        // Instantiate Http Request Param Object
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        //UPDATE REQUEST
+        client.get(CarpoolService.RETRIEVE_BY_USER_END_POINT, params, CarpoolResource.executeResponseHandler());
     }
 
 }

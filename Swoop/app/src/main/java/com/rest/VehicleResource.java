@@ -8,7 +8,7 @@ package com.rest;
  */
 
 
-public class VehicleResource {
+public final class VehicleResource {
 
     public static final String USER_ID = "userId";
     public static final String LICENSE_PLATE = "licensePlate";
