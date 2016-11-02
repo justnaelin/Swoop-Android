@@ -1,5 +1,5 @@
 general:
-   build_dir: Swoop
+  build_dir: Swoop
 notify:
-   webhooks:
-       - url: http://csumbse.net/harbormaster/hook/circleci/
+  webhooks:
+    - url: http://csumbse.net/harbormaster/hook/circleci/
