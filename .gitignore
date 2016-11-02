@@ -1,9 +1,9 @@
-.idea 
+Swoop/.idea 
 
-.idea/libraries
+*.idea/libraries
 
 #Swoop/.idea/workspace.xml
-.idea/workspace.xml
+*.idea/workspace.xml
 
 # Built application files
 *.apk
