@@ -1,3 +1,5 @@
+general:
+	build_dir: Swoop
 test:
    override:
        - mvn verify

@@ -1,9 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.swoop.swoop.PreferencesFragment">
+    android:layout_height="match_parent" tools:context="com.swoop.swoop.BankAccountFragment">
 
     <!-- Fragment layout -->
     <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="empty fragment" />
+        android:text="Bank Account Fragment" />
 
 </FrameLayout>

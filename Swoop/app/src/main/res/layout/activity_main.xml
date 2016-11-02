@@ -10,48 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-        android:layout_weight="1">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/swoop_button"
-                android:drawableTop="@mipmap/ic_launcher"
-                android:textSize="4pt"
-                android:text="Swoops" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/notification_button"
-                android:drawableTop="@mipmap/ic_launcher"
-                android:textSize="4pt"
-                android:text="Notifications"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/new_swoops_button"
-                android:drawableTop="@mipmap/ic_launcher"
-                android:textSize="4pt"
-                android:text="New Swoops"
-                android:layout_weight="1"
-                />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/create_swoop_button"
-                android:drawableTop="@mipmap/ic_launcher"
-                android:textSize="4pt"
-                android:text="Create Swoop"/>
-
-        </LinearLayout>
-
         <!--maybe for fragments -->
         <LinearLayout
             android:layout_width="wrap_content"

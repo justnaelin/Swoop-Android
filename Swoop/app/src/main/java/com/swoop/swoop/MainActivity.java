@@ -1,9 +1,8 @@
 package com.swoop.swoop;
 
-import android.app.DatePickerDialog;
+
+
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
@@ -15,49 +14,34 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
-
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mCreateSwoopButton, mSwoopButton, mNotificationButton, mNewSwoops;
     private ListView mDrawerList;
     private RelativeLayout mDrawerPanel;
     private DrawerLayout mDrawerLayout;
     private ArrayList<DrawerItem> mDrawerItems = new ArrayList<DrawerItem>();
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mCreateSwoopButton = (Button) findViewById(R.id.create_swoop_button);
-        mSwoopButton = (Button) findViewById(R.id.swoop_button);
-        mNotificationButton = (Button) findViewById(R.id.notification_button);
-        mNewSwoops = (Button) findViewById(R.id.new_swoops_button);
-
-        mCreateSwoopButton.setOnClickListener(this);
-        mSwoopButton.setOnClickListener(this);
-        mNotificationButton.setOnClickListener(this);
-        mNewSwoops.setOnClickListener(this);
 
 
         //All Drawer Navigation Items initialized
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_list_title_0), getString(R.string.drawer_list_title_0), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_list_title_1), getString(R.string.drawer_list_title_1), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_list_title_2), getString(R.string.drawer_list_title_2), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_list_title_3), getString(R.string.drawer_list_title_3), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_list_title_4), getString(R.string.drawer_list_title_4), R.mipmap.ic_launcher));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_0), getString(R.string.drawer_description_0), R.mipmap.ic_launcher));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_1), getString(R.string.drawer_description_1), R.mipmap.ic_launcher));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_2), getString(R.string.drawer_description_2), R.mipmap.ic_launcher));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_3), getString(R.string.drawer_description_3), R.mipmap.ic_launcher));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_4), getString(R.string.drawer_description_4), R.mipmap.ic_launcher));
 
 
         // Initializing DrawerLayout
@@ -79,6 +63,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        fragment = new HomeFragment();
+        getFragmentManager().beginTransaction()
+
+                .replace(R.id.mainContent, fragment)
+                .commit();
+
+        setTitle(mDrawerItems.get(0).mTitle);
     }
 
     void createToast(String s) {
@@ -96,21 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Check what was clicked
         switch (v.getId()) {
-            case R.id.create_swoop_button:
-                Intent intent = new Intent(v.getContext(), CreateCarpoolActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.swoop_button:
-                createToast("Swoop button was clicked");
-                break;
-            case R.id.notification_button:
-                createToast("Notification button was clicked");
-                break;
-            case R.id.new_swoops_button:
-                //createToast("New Swoop button was clicked");
-                //break;
-                Intent map_intent = new Intent(v.getContext(), CarpoolDetailPageActivity.class);
-                startActivity(map_intent);
 
         }
 
@@ -124,12 +100,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void itemSelectedFromDrawer(int position) {
 
-        /*Fragment fragment = new PreferencesFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.mainContent, fragment)
-                .commit();
-*/
+
+        if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_0)){
+            fragment = new HomeFragment();
+            getFragmentManager().beginTransaction()
+
+                    .replace(R.id.mainContent, fragment)
+                    .commit();
+
+        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_1)){
+            fragment = new NotificationFragment();
+            getFragmentManager().beginTransaction()
+
+                    .replace(R.id.mainContent, fragment)
+                    .commit();
+        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_2)){
+            fragment = new BankAccountFragment();
+            getFragmentManager().beginTransaction()
+
+                    .replace(R.id.mainContent, fragment)
+                    .commit();
+        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_3)){
+            fragment = new AddVehicleFragment();
+            getFragmentManager().beginTransaction()
+
+                    .replace(R.id.mainContent, fragment)
+                    .commit();
+        }
         mDrawerList.setItemChecked(position, true);
         setTitle(mDrawerItems.get(position).mTitle);
 
@@ -150,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //Inner class to generate the list adapter
+    //Inner class to generate the list adapter (Controller)
     class DrawerListAdapter extends BaseAdapter {
 
         Context mContext;

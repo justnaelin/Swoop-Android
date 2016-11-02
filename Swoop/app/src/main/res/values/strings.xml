@@ -25,18 +25,26 @@
     <string name="text_edit_profile">Edit Profile</string>
 
     <!--Drawer List-->
-    <string name="drawer_list_title_0">Home</string>
-    <string name="drawer_list_title_1">My Swoops</string>
-    <string name="drawer_list_title_2">Bank Account</string>
-    <string name="drawer_list_title_3">Add Vehicles</string>
-    <string name="drawer_list_title_4">Log Out</string>
+    <string name="drawer_title_0">Home</string>
+    <string name="drawer_title_1">Notification</string>
+    <string name="drawer_title_2">Bank Account</string>
+    <string name="drawer_title_3">Add Vehicle</string>
+    <string name="drawer_title_4">Log Out</string>
 
-    <string name="drawer_list_description_0">Main page</string>
-    <string name="drawer_list_description_1">View swoops</string>
-    <string name="drawer_list_description_2">Edit bank information</string>
-    <string name="drawer_list_description_3">Edit information</string>
-    <string name="drawer_list_description_4"></string>
+    <string name="drawer_description_0">Main page</string>
+    <string name="drawer_description_1">View notifications</string>
+    <string name="drawer_description_2">Edit bank information</string>
+    <string name="drawer_description_3">Edit information</string>
+    <string name="drawer_description_4"></string>
     <string name="title_activity_carpool_detail_page">Map</string>
+
+
+    <!--HomeFragment-->
+    <string name="main_title_0">Swoops</string>
+    <string name="main_title_1">My Swoops</string>
+    <string name="main_title_2">Requested Swoops</string>
+
+
 
 
 </resources>
