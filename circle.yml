@@ -6,6 +6,9 @@ test:
     - ./gradlew build
 general:
   build_dir: Swoop
+  artifacts:
+    - "Swoop/build/generated/*.apk"
+    - "build/generated/*.apk"
 notify:
   webhooks:
     - url: http://csumbse.net/harbormaster/hook/circleci/
