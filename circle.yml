@@ -4,6 +4,11 @@ dependencies:
 test:
   post:
     - ./gradlew build
+  override: 
+    - ./gradle build test jacocoTestReport
+    - cp ./*/bild/outputs/apk/*.apk $CIRCLE_ARTIFACTS/
+    - cp ./*/build/test-results/freeDebug/*.xml $CIRCLE_TEST_REPORTS/
+    - cp ./*/build/;bash <(curl -s htps://codecov.io./bash)
 general:
   build_dir: Swoop
   artifacts:
