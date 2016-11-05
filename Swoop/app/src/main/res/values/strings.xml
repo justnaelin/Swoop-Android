@@ -45,6 +45,8 @@
     <string name="main_title_2">Requested Swoops</string>
 
 
+    <!--Facebook Login-->
+    <string name="facebook_app_id">1709568252703055</string>
 
 
 </resources>
