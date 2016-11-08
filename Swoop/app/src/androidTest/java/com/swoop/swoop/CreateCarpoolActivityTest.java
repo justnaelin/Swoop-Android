@@ -1,6 +1,7 @@
 package com.swoop.swoop;
 
 import android.support.test.rule.ActivityTestRule;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  * @version 1.0
  */
 
-public class MainActivityTest {
+public class CreateCarpoolActivityTest {
 
 
     @Rule public ActivityTestRule<CreateCarpoolActivity> activityTestRule =
