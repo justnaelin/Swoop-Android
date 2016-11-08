@@ -169,10 +169,12 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
                             mInputMaxPeople.getText().toString(),
                             CarpoolStatus.PENDING,
                             isDriver);
-                    if (!response.equals(CarpoolService.VALID)) {
+                    /*if (!response.equals(CarpoolService.VALID)) {
                         //Check if return response is valid
                         createToast(response);
-                    }
+                    }*/
+                    //FOR TESTS
+                    createToast(response);
                 }
                 break;
             case R.id.radio_passanger:
