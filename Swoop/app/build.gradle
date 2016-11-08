@@ -11,14 +11,16 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     productFlavors {
         free {
-            applicationId 'com.dicedmelon.example.android.free'
+            applicationId 'com.swoop.android.free'
         }
         paid {
-            applicationId 'com.dicedmelon.example.android'
+            applicationId 'com.swoop.android'
         }
     }
     buildTypes {
@@ -59,7 +61,14 @@ dependencies {
     //Test dependencies
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.0'){
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+
 
     testCompile 'org.assertj:assertj-core:1.7.1'
     testCompile 'junit:junit:4.12'
+
 }
