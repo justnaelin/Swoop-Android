@@ -46,7 +46,7 @@ public class FacebookLogin extends Activity{
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("LOGIN_SUCCESS", "Success");
                         Profile profile = Profile.getCurrentProfile();
-                        Log.d("facebookID",profile.getId());
+                     //   Log.d("facebookID",profile.getId());
                         loginButton.setVisibility(View.INVISIBLE); //<- IMPORTANT
                         Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(intent);
@@ -62,6 +62,7 @@ public class FacebookLogin extends Activity{
                     public void onError(FacebookException exception) {
                         // App code
                         Log.d("message: ", "error loggin in");
+                        Log.d("ERROR onERROR:", exception.getStackTrace().toString());
                     }
                 });
 
