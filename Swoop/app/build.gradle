@@ -15,10 +15,10 @@ android {
 
     productFlavors {
         free {
-            applicationId 'com.dicedmelon.example.android.free'
+            applicationId 'com.swoop.android.free'
         }
         paid {
-            applicationId 'com.dicedmelon.example.android'
+            applicationId 'com.swoop.android'
         }
     }
     buildTypes {
