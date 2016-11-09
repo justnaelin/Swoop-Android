@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.main_drawer_item, null);
+                view = inflater.inflate(R.layout.main_drawer_listview, null);
             } else {
                 view = convertView;
             }

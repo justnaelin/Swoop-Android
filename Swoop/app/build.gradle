@@ -77,4 +77,5 @@ dependencies {
     testCompile 'org.assertj:assertj-core:1.7.1'
     testCompile 'junit:junit:4.12'
 
+    compile 'com.google.android.gms:play-services-appindexing:9.0.0'
 }

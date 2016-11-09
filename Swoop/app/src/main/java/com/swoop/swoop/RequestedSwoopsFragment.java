@@ -2,10 +2,15 @@ package com.swoop.swoop;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.mapping.Carpool;
+
+import java.util.ArrayList;
 
 /**
  * RequestedSwoopsFragment
@@ -16,9 +21,13 @@ import android.widget.Toast;
 
 public class RequestedSwoopsFragment extends Fragment implements View.OnClickListener{
 
+    private ArrayList<Carpool> requestedCarpools = new ArrayList<Carpool>();
+
     public RequestedSwoopsFragment() {
         // Required empty public constructor
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
