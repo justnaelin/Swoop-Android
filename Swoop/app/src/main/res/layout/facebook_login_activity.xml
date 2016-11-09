@@ -19,4 +19,11 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp" />
 
+    <!--TODO: BUTTON FOR DEVELOPMENT ONLY-->
+    <Button
+        android:text="main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_button" />
+
 </LinearLayout>

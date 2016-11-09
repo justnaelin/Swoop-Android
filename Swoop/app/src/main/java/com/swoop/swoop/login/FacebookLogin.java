@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -19,6 +20,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.swoop.swoop.MainActivity;
+import com.swoop.swoop.R;
 
 /**
  * Created by anaperez on 11/4/16.
@@ -83,6 +85,17 @@ public class FacebookLogin extends Activity{
             startActivity(intent);
             finish();//<- IMPORTANT
         }
+
+        //TODO: THIS BUTTON IS ONLY FOR DEVELOPMENT
+        Button mainButton = (Button) findViewById(R.id.main_button);
+        mainButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
