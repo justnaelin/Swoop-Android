@@ -11,8 +11,12 @@ import com.mapping.Carpool;
 import java.util.ArrayList;
 
 /**
- * Created by ychino on 11/8/16.
+ * RequestedSwoopsAdapter
+ *
+ * @author Yarely Chino
+ * @version 1.0
  */
+
 
 public class RequestedSwoopsAdapter extends BaseAdapter {
 
