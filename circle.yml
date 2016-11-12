@@ -1,6 +1,11 @@
 dependencies:
   pre:
      - echo y | android update sdk --no-ui --all --filter "tool,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository,android-23"
+general:
+  build_dir: Swoop
+  artifacts:
+    - "Swoop/build/generated/*.apk"
+    - "build/generated/*.apk"
 test:
   override:
     - ./gradlew build test jacocoTestReport
@@ -9,11 +14,6 @@ test:
     - cp ./*/build/;bash <(curl -s https://codecov.io/bash)
   post:
     - ./gradlew build
-general:
-  build_dir: Swoop
-  artifacts:
-    - "Swoop/build/generated/*.apk"
-    - "build/generated/*.apk"
 notify:
   webhooks:
     - url: http://csumbse.net/harbormaster/hook/circleci/
