@@ -121,7 +121,7 @@
             android:orientation="vertical">
 
 
-            <EditText android:id="@+id/input_location"
+            <!--<EditText android:id="@+id/input_location"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,7 +131,19 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_destination" />
+                android:hint="@string/hint_destination" />-->
+            
+            <fragment
+                android:id="@+id/location_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"/>
+
+            <fragment
+                android:id="@+id/destination_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"/>
 
             <EditText android:id="@+id/input_max_people"
                 android:layout_weight="1"
