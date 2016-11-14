@@ -1,6 +1,7 @@
 package com.swoop.swoop;
 
 import android.app.DatePickerDialog;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,18 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.rest.InputUtility;
 import com.mapping.CarpoolStatus;
 import com.service.CarpoolService;
+import android.util.Log;
+
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.common.api.Status;
 
 import java.util.Calendar;
 
@@ -30,11 +40,18 @@ import java.util.Calendar;
 
 public class CreateCarpoolActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText mInputLocation, mInputDestination, mInputRate, mInputMaxPeople;
+    private EditText mInputRate, mInputMaxPeople;
     private Button mSubmitButton, mButtonDatePicker, mButtonTimePicker;
     private ProgressDialog mProgressDialog;
     private TextView mTxtDate, mTxtTime;
     private RadioGroup mRadioGroup;
+
+    //Google Places
+    private PlaceAutocompleteFragment locationFragment;
+    private PlaceAutocompleteFragment destinationFragment;
+    private String mLocation;
+    private String mDestination;
+    private static final String TAG = "CreateCarpoolActivity";
 
     // Start with the RadioButtonDriver clicked
     private boolean isDriver = true;
@@ -72,6 +89,36 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
         mButtonDatePicker.setOnClickListener(this);
         mButtonTimePicker.setOnClickListener(this);
 
+        locationFragment = (PlaceAutocompleteFragment)getFragmentManager()
+                .findFragmentById(com.swoop.swoop.R.id.location_input);
+        locationFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                mLocation = place.getName().toString();
+                Log.i(TAG, "Place:" + place.getName());
+            }
+
+            @Override
+            public void onError(Status status) {
+                Log.i(TAG, "Error occurred:" + status);
+            }
+        });
+
+        destinationFragment = (PlaceAutocompleteFragment) getFragmentManager()
+                .findFragmentById(R.id.destination_input);
+        destinationFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                mDestination = place.getName().toString();
+                Log.i(TAG, "Place:" + place.getName());
+            }
+
+            @Override
+            public void onError(Status status) {
+                Log.i(TAG, "Error occurred:" + status);
+            }
+        });
+
 
     }
 
@@ -82,15 +129,15 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
      */
     public boolean checkEmptyFields() {
 
-        mInputLocation = (EditText) findViewById(R.id.input_location);
-        mInputDestination = (EditText) findViewById(R.id.input_destination);
+        //mInputLocation = (EditText) findViewById(R.id.input_location);
+        //mInputDestination = (EditText) findViewById(R.id.input_destination);
         mInputRate = (EditText) findViewById(R.id.input_rate);
         mInputMaxPeople = (EditText) findViewById(R.id.input_max_people);
 
         if (InputUtility.isNotNull(mTxtDate.getText().toString()) &&
                 InputUtility.isNotNull(mTxtTime.getText().toString()) &&
-                InputUtility.isNotNull(mInputLocation.getText().toString()) &&
-                InputUtility.isNotNull(mInputDestination.getText().toString()) &&
+                !mLocation.isEmpty() &&
+                !mDestination.isEmpty() &&
                 InputUtility.isNotNull(mInputRate.getText().toString()) &&
                 InputUtility.isNotNull(mInputMaxPeople.getText().toString())) {
             return true;
@@ -161,9 +208,9 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
                 // TODO: check if you can do this in a different thread
 
                 if (checkEmptyFields()) {
-                    String response = CarpoolService.verifyCreate("123098", "23334",
-                            mInputLocation.getText().toString(),
-                            mInputDestination.getText().toString(),
+                    String response = CarpoolService.verifyCreate("123097", "23334",
+                            mLocation,
+                            mDestination,
                             mTxtDate.getText().toString() + " , " + mTxtTime.getText().toString(),
                             mInputRate.getText().toString(),
                             mInputMaxPeople.getText().toString(),

@@ -48,40 +48,37 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    compile 'com.android.support:appcompat-v7:23.4.0'
+
     //facebook login
-    
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     //AWS
-    
+    compile 'com.amazonaws:aws-android-sdk-core:2.2.+'
+    compile 'com.amazonaws:aws-android-sdk-autoscaling:2.2.+'
+
     //Helps in the client server connection
-    
+    compile 'cz.msebera.android:httpclient:4.3.6'
+
     //Google maps api
-    
+    compile 'com.google.android.gms:play-services-maps:9.0.0'
+    compile 'com.google.android.gms:play-services-location:9.0.0'
+
     //Json serialization and deserialization
-    
-    //mockito for testing
-    
+    compile 'com.google.code.gson:gson:2.7'
+
     //Test dependencies
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.0') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }
+
     //to retrieve JSON Objects from endpoints and convert them into java objects
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
 
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'com.amazonaws:aws-android-sdk-core:2.2.+'
-    compile 'com.amazonaws:aws-android-sdk-autoscaling:2.2.+'
-    compile 'cz.msebera.android:httpclient:4.3.6'
-    compile 'com.google.android.gms:play-services-maps:9.8.0'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.android.support:design:23.4.0'
+    testCompile 'org.assertj:assertj-core:1.7.1'
     testCompile 'junit:junit:4.12'
-    // Optional -- Mockito framework
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile 'org.mockito:mockito-core:1.+'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test:rules:0.5'
 }
