@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -24,13 +25,14 @@ import com.swoop.swoop.MainActivity;
  * Created by anaperez on 11/4/16.
  * Summary: Authentication for swoop users to login with Facebook.
  */
-public class FacebookLogin extends Activity{
+public class FacebookLogin extends Activity implements View.OnClickListener{
     private CallbackManager callbackManager;
     private TextView mTextDetails;
     private AccessTokenTracker accessTokenTracker;
     private ProfileTracker profileTracker;
     private LoginButton loginButton;
     private AccessToken accessToken;
+    private Button skipLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,8 @@ public class FacebookLogin extends Activity{
         setContentView(com.swoop.swoop.R.layout.facebook_login_activity);
         loginButton = (LoginButton) findViewById(com.swoop.swoop.R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
-
+        skipLogin = (Button) findViewById(com.swoop.swoop.R.id.skipLogin);
+        skipLogin.setOnClickListener(this);
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -88,5 +91,17 @@ public class FacebookLogin extends Activity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onClick(View v){
+        switch(v.getId()){
+            case com.swoop.swoop.R.id.skipLogin:
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }
