@@ -13,11 +13,12 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.service.UserService;
+import com.swoop.swoop.CreateUser;
 import com.swoop.swoop.MainActivity;
 
 /**
@@ -45,13 +46,32 @@ public class FacebookLogin extends Activity{
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("LOGIN_SUCCESS", "Success");
-                        Profile profile = Profile.getCurrentProfile();
-                     //   Log.d("facebookID",profile.getId());
-                        loginButton.setVisibility(View.INVISIBLE); //<- IMPORTANT
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();//<- IMPORTANT
-                        // App code
+                        AccessToken accessToken = loginResult.getAccessToken();
+                        if(accessToken.getUserId() != null){
+                            if(accessToken != null) {
+                                loginButton.setVisibility(View.INVISIBLE); //<- IMPORTANT
+                                if(UserService.isUserById(accessToken.getUserId())){
+                                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Log.d("NO USER ID", "no id for user");
+                                    Intent intent = new Intent(getBaseContext(), CreateUser.class);
+                                    Bundle newBundle = new Bundle();
+                                    newBundle.putString("USER_ID",accessToken.getUserId());
+                                    intent.putExtras(newBundle);
+                                    getBaseContext().startActivity(intent);
+                                }
+                                finish();//<- IMPORTANT
+                            }
+                        }
+                        else{
+                            Intent intent = new Intent(getBaseContext(), CreateUser.class);
+                            Bundle newBundle = new Bundle();
+                            newBundle.putString("USER_ID",accessToken.getUserId());
+                            intent.putExtras(newBundle);
+                            startActivity(intent);
+                        }
                     }
                     @Override
                     public void onCancel() {
@@ -65,7 +85,6 @@ public class FacebookLogin extends Activity{
                         Log.d("ERROR onERROR:", exception.getStackTrace().toString());
                     }
                 });
-
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(

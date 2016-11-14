@@ -29,13 +29,13 @@
     <string name="drawer_title_1">Notification</string>
     <string name="drawer_title_2">Bank Account</string>
     <string name="drawer_title_3">Add Vehicle</string>
-    <string name="drawer_title_4">Log Out</string>
+    <string name="drawer_title_4">Sign Out</string>
 
     <string name="drawer_description_0">Main page</string>
     <string name="drawer_description_1">View notifications</string>
     <string name="drawer_description_2">Edit bank information</string>
     <string name="drawer_description_3">Edit information</string>
-    <string name="drawer_description_4"></string>
+    <string name="drawer_description_4">log out of swoop</string>
     <string name="title_activity_carpool_detail_page">Map</string>
 
 
@@ -47,6 +47,24 @@
 
     <!--Facebook Login-->
     <string name="facebook_app_id">1709568252703055</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_create_user">CreateUser</string>
+
+    <!--Create User-->
+    <string name="hint_userName">john</string>
+    <string name="hint_userLastName">smith</string>
+    <string name="hint_userEmail">jsmith@gmail.com</string>
+    <string name="hint_cellPhone">831-888-8888</string>
+    <string name="hint_DOB">01/10/1994</string>
+    <string name="hint_homeAddress">123 Bluff Ave city state zipcode</string>
+
+    <string name="text_user_name">firstName</string>
+    <string name="text_user_last_name">lastName</string>
+    <string name="text_user_email">email</string>
+    <string name="text_user_cellphone">cellPhone</string>
+    <string name="text_user_date_of_birth">dateOfBirth</string>
+    <string name="text_user_home_address">homeAddress</string>
+    <string name="submit_button_to_create_user">sign up</string>
 
 
 </resources>

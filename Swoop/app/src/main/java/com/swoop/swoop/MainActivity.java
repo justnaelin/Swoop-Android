@@ -1,12 +1,13 @@
 package com.swoop.swoop;
 
 
-
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.swoop.swoop.login.FacebookLogin;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -98,31 +104,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void itemSelectedFromDrawer(int position) {
 
 
-        if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_0)){
+        if(mDrawerItems.get(position).mTitle.toString().equals(getString(R.string.drawer_title_0))){
             fragment = new HomeFragment();
             getFragmentManager().beginTransaction()
 
                     .replace(R.id.mainContent, fragment)
                     .commit();
 
-        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_1)){
+        }else if(mDrawerItems.get(position).mTitle.toString().equals(getString(R.string.drawer_title_1))){
             fragment = new NotificationFragment();
             getFragmentManager().beginTransaction()
 
                     .replace(R.id.mainContent, fragment)
                     .commit();
-        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_2)){
+        }else if(mDrawerItems.get(position).mTitle.toString().equals(getString(R.string.drawer_title_2))){
             fragment = new BankAccountFragment();
             getFragmentManager().beginTransaction()
 
                     .replace(R.id.mainContent, fragment)
                     .commit();
-        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_3)){
+        }else if(mDrawerItems.get(position).mTitle.toString().equals(getString(R.string.drawer_title_3))){
+            Log.d("VEHICLE", "add VEHICLE".toString());
             fragment = new AddVehicleFragment();
             getFragmentManager().beginTransaction()
 
                     .replace(R.id.mainContent, fragment)
                     .commit();
+        }
+        else if(mDrawerItems.get(position).mTitle.toString().equals(getString(R.string.drawer_title_4))) {
+            //FACEBOOK LOGOUT
+            AccessToken accessToken = AccessToken.getCurrentAccessToken();
+            if(accessToken != null){
+                //Toast.makeText(getApplicationContext(),"LOGGING OUT", Toast.LENGTH_LONG).show();
+                LoginManager.getInstance().logOut();
+            }
+            Intent intent = new Intent(getBaseContext(), FacebookLogin.class);
+            startActivity(intent);
+            finish();
         }
         mDrawerList.setItemChecked(position, true);
         setTitle(mDrawerItems.get(position).mTitle);
@@ -181,7 +199,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 view = convertView;
             }
-
             TextView titleView = (TextView) view.findViewById(R.id.title);
             TextView subtitleView = (TextView) view.findViewById(R.id.subTitle);
             ImageView iconView = (ImageView) view.findViewById(R.id.icon);
