@@ -129,8 +129,6 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
      */
     public boolean checkEmptyFields() {
 
-        //mInputLocation = (EditText) findViewById(R.id.input_location);
-        //mInputDestination = (EditText) findViewById(R.id.input_destination);
         mInputRate = (EditText) findViewById(R.id.input_rate);
         mInputMaxPeople = (EditText) findViewById(R.id.input_max_people);
 
@@ -218,11 +216,6 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
                             mInputMaxPeople.getText().toString(),
                             CarpoolStatus.PENDING,
                             isDriver);
-                    /*if (!response.equals(CarpoolService.VALID)) {
-                        //Check if return response is valid
-                        createToast(response);
-                    }*/
-                    //FOR TESTS
                     createToast(response);
                 }
                 break;
