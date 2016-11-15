@@ -11,7 +11,7 @@ test:
     - ./gradlew build test jacocoTestReport
     - cp ./*/build/outputs/apk/*.apk $CIRCLE_ARTIFACTS/
     - cp ./*/build/test-results/freeDebug/*.xml $CIRCLE_TEST_REPORTS/
-    - cp ./*/build/;bash <(curl -s https://codecov.io/bash)
+    - cp ./*/build/;bash <(curl -s https://codecov.io/bash) -t CODECOV_TOKEN
   post:
     - ./gradlew build
 notify:
