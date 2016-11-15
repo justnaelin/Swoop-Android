@@ -18,7 +18,7 @@ test:
     - cp ./*/build/test-results/freeDebug/*.xml $CIRCLE_TEST_REPORTS/
     - cp ./*/build/;bash <(curl -s https://codecov.io/bash) -t CODECOV_TOKEN
     - (echo "Running JUnit tests")
-    -(./gradlew connectedAndroidTest)
+    - (./gradlew connectedAndroidTest)
   post:
     - ./gradlew build
 notify:
