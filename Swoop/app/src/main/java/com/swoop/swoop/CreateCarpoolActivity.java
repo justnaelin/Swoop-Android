@@ -90,7 +90,7 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
         mButtonTimePicker.setOnClickListener(this);
 
         locationFragment = (PlaceAutocompleteFragment)getFragmentManager()
-                .findFragmentById(com.swoop.swoop.R.id.location_input);
+                .findFragmentById(R.id.location_input);
         locationFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -139,7 +139,9 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
                 mLocation != null &&
                 mDestination != null &&
                 InputUtility.isNotNull(mInputRate.getText().toString()) &&
-                InputUtility.isNotNull(mInputMaxPeople.getText().toString())) {
+                InputUtility.isNotNull(mInputMaxPeople.getText().toString()) &&
+                InputUtility.isNotNegative(mInputRate.getText().toString()) &&
+                InputUtility.isNotNegative(mInputMaxPeople.getText().toString())) {
             return true;
         } else {
 

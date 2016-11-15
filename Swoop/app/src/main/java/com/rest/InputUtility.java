@@ -19,5 +19,16 @@ public final class InputUtility {
         return string != null && string.trim().length() > 0 ? true : false;
     }
 
+    /**
+     * Checks if string is not negative
+     *
+     * @param string
+     * @return true if string is positive, and false if string is negative
+     */
+    public static boolean isNotNegative(String string){
+
+        return (Double.valueOf(string) >= 0 )? true : false;
+    }
+
 
 }
