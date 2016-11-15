@@ -7,6 +7,11 @@ general:
     - "Swoop/build/generated/*.apk"
     - "build/generated/*.apk"
 test:
+  pre:
+    - emulator -avd circleci-andoird22 -no-audio -no-window:
+        background: true
+        parallel: true
+    - circle-android wait-for-boot
   override:
     - ./gradlew assembleRelease
     - ./gradlew build test jacocoTestReport
