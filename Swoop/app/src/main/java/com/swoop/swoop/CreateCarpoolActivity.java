@@ -136,8 +136,8 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
 
         if (InputUtility.isNotNull(mTxtDate.getText().toString()) &&
                 InputUtility.isNotNull(mTxtTime.getText().toString()) &&
-                !mLocation.isEmpty() &&
-                !mDestination.isEmpty() &&
+                mLocation != null &&
+                mDestination != null &&
                 InputUtility.isNotNull(mInputRate.getText().toString()) &&
                 InputUtility.isNotNull(mInputMaxPeople.getText().toString())) {
             return true;
