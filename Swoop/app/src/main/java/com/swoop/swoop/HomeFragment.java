@@ -72,11 +72,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Intent intent_map = new Intent(v.getContext(), CarpoolDetailPageActivity.class);
                 startActivity(intent_map);
                 break;
-//                fragment = new SwoopsFragment();
-//                getFragmentManager().beginTransaction()
-//                        .replace(R.id.home_fragment_container, fragment)
-//                        .commit();
-//                break;
             case R.id.my_swoops_button:
                 fragment = new MySwoopsFragment();
                 getFragmentManager().beginTransaction()
@@ -95,13 +90,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }
 
     }
-
-    void createToast(String s) {
-        Toast toast = Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
-
 
 
 }

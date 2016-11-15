@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
         }
-
     }
 
     /**
@@ -108,33 +107,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void itemSelectedFromDrawer(int position) {
 
+        String title = mDrawerItems.get(position).mTitle.toString();
 
-        if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_0)){
+        if(title.equals(getString(R.string.drawer_title_0))){
             fragment = new HomeFragment();
-            getFragmentManager().beginTransaction()
-
-                    .replace(R.id.mainContent, fragment)
-                    .commit();
-
-        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_1)){
+        }else if(title.equals(getString(R.string.drawer_title_1))){
             fragment = new NotificationFragment();
-            getFragmentManager().beginTransaction()
-
-                    .replace(R.id.mainContent, fragment)
-                    .commit();
-        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_2)){
+        }else if(title.equals(getString(R.string.drawer_title_2))){
             fragment = new BankAccountFragment();
-            getFragmentManager().beginTransaction()
-
-                    .replace(R.id.mainContent, fragment)
-                    .commit();
-        }else if(mDrawerItems.get(position).mTitle.toString() == getString(R.string.drawer_title_3)){
+        }else if(title.equals(getString(R.string.drawer_title_3))){
             fragment = new AddVehicleFragment();
-            getFragmentManager().beginTransaction()
-
-                    .replace(R.id.mainContent, fragment)
-                    .commit();
         }
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.mainContent, fragment)
+                .commit();
         mDrawerList.setItemChecked(position, true);
         setTitle(mDrawerItems.get(position).mTitle);
 
