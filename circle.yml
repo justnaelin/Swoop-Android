@@ -7,19 +7,17 @@ general:
     - "Swoop/build/generated/*.apk"
     - "build/generated/*.apk"
 test:
-  pre:
+  override:
     - emulator -avd circleci-android22 -no-audio -no-window:
         background: true
         parallel: true
     - circle-android wait-for-boot
-  override:
-    - ./gradlew assembleRelease
+    - ./gradlew connectedAndroidTest
     - ./gradlew build test jacocoTestReport
     - cp ./*/build/outputs/apk/*.apk $CIRCLE_ARTIFACTS/
     - cp ./*/build/test-results/freeDebug/*.xml $CIRCLE_TEST_REPORTS/
     - cp ./*/build/;bash <(curl -s https://codecov.io/bash) -t CODECOV_TOKEN
     - (echo "Running JUnit tests")
-    - (./gradlew connectedAndroidTest)
   post:
     - ./gradlew build
 notify:
