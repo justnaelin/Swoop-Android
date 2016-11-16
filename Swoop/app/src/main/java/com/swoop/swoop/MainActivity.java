@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         //initialize the first fragment display
-        initFirstFragment();
+        fragment = new HomeFragment();
+
+        //will always initialize the first fragment to home
+        initFragment(0);
+
 
     }
 
@@ -70,20 +74,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawerList = (ListView) findViewById(R.id.navList);
     }
 
-    private void initFirstFragment(){
-
-        fragment = new HomeFragment();
-        getFragmentManager().beginTransaction()
-
-                .replace(R.id.mainContent, fragment)
-                .commit();
-
-        setTitle(mDrawerItems.get(0).mTitle);
-    }
-
     void createToast(String s) {
         Toast toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    /**
+     * Implementation for initializing inner fragment using the position in drawer list.
+     *
+     * @param //int position
+     */
+    //Initialize fragment, and replace it's content using
+    private void initFragment(int position) {
+
+        if(position >= 0 && position < mDrawerItems.size()){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.mainContent, fragment)
+                    .commit();
+            mDrawerList.setItemChecked(position, true);
+            setTitle(mDrawerItems.get(position).mTitle);
+
+        }
     }
 
     /**
@@ -111,19 +122,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(title.equals(getString(R.string.drawer_title_0))){
             fragment = new HomeFragment();
+            initFragment(position);
+
         }else if(title.equals(getString(R.string.drawer_title_1))){
             fragment = new NotificationFragment();
+            initFragment(position);
+
         }else if(title.equals(getString(R.string.drawer_title_2))){
             fragment = new BankAccountFragment();
+            initFragment(position);
+
         }else if(title.equals(getString(R.string.drawer_title_3))){
             fragment = new AddVehicleFragment();
+            initFragment(position);
         }
-
-        getFragmentManager().beginTransaction()
-                .replace(R.id.mainContent, fragment)
-                .commit();
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mDrawerItems.get(position).mTitle);
 
         // Close the drawer
         mDrawerLayout.closeDrawer(mDrawerPanel);
