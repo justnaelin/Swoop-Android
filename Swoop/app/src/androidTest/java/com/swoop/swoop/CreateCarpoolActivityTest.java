@@ -13,20 +13,15 @@ import org.junit.runner.RunWith;
 import android.support.test.espresso.contrib.PickerActions;
 import android.widget.TimePicker;
 
-import com.service.CarpoolService;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 
 /**
  * Main Activity Test
@@ -56,18 +51,12 @@ public class CreateCarpoolActivityTest {
 
     @Test public void inputInformationToCreateCarpool() {
         //Test User valid input
-//        onView(withId(R.id.input_location))
-//                .perform(typeText("1342, Salinas CA"), closeSoftKeyboard());
-//        onView(withId(R.id.input_destination)).perform(typeText("2312, Greenfield CA"), closeSoftKeyboard());
-
         onView(withId(R.id.input_max_people))
                 .perform(typeText("6"), closeSoftKeyboard());
         onView(withId(R.id.input_rate))
                 .perform(typeText("34.2"), closeSoftKeyboard());
 
         //verify user input has been entered
-//        onView(withText("1342, Salinas CA")).check(matches(isDisplayed()));
-//        onView(withText("2312, Greenfield CA")).check(matches(isDisplayed()));
         onView(withText("6")).check(matches(isDisplayed()));
         onView(withText("34.2")).check(matches(isDisplayed()));
 
@@ -75,7 +64,6 @@ public class CreateCarpoolActivityTest {
         int year = 2017;
         int month = 11;
         int day = 15;
-
         int hour = 10;
         int minutes = 59;
 
