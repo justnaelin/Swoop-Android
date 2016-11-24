@@ -39,8 +39,10 @@ public class CarpoolDetailPageActivity extends FragmentActivity implements OnMap
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng sydney = new LatLng(36.6544, 121.8018);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("CSUMB"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng((sydney) , 14.4));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new
+                LatLng(36.65444970000001,-121.80175999999999), 16.0f));
     }
 }
