@@ -36,14 +36,20 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".CarpoolDetailPageActivity"
-            android:label="@string/title_activity_carpool_detail_page"></activity>
+            android:label="@string/title_activity_carpool_detail_page" />
 
-        <!--Facebook Login Activity-->
+        <!-- Facebook Login Activity -->
         <activity android:name=".MainActivity" />
+        <activity
+            android:name=".CreateUserActivity"
+            android:label="@string/title_activity_create_user"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
