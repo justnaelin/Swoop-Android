@@ -35,7 +35,7 @@
     <string name="drawer_description_1">View notifications</string>
     <string name="drawer_description_2">Edit bank information</string>
     <string name="drawer_description_3">Edit information</string>
-    <string name="drawer_description_4"></string>
+    <string name="drawer_description_4">Log out of Swoop</string>
     <string name="title_activity_carpool_detail_page">Map</string>
 
 

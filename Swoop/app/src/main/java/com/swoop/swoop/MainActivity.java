@@ -1,9 +1,9 @@
 package com.swoop.swoop;
 
 
-
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +17,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.login.LoginManager;
+import com.swoop.swoop.login.FacebookLogin;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -135,6 +139,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(title.equals(getString(R.string.drawer_title_3))){
             fragment = new AddVehicleFragment();
             initFragment(position);
+        }else if(title.equals(getString(R.string.drawer_title_4))) {
+            LoginManager.getInstance().logOut();
+            Intent intent = new Intent(getBaseContext(), FacebookLogin.class);
+            startActivity(intent);
         }
 
         // Close the drawer

@@ -14,7 +14,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -48,8 +47,6 @@ public class FacebookLogin extends Activity implements View.OnClickListener{
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("LOGIN_SUCCESS", "Success");
-                        Profile profile = Profile.getCurrentProfile();
-                     //   Log.d("facebookID",profile.getId());
                         loginButton.setVisibility(View.INVISIBLE); //<- IMPORTANT
                         Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(intent);
