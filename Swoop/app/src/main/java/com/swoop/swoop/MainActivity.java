@@ -1,12 +1,15 @@
 package com.swoop.swoop;
 
 
-
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ListView mDrawerList;
     private RelativeLayout mDrawerPanel;
     private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
     private ArrayList<DrawerItem> mDrawerItems = new ArrayList<DrawerItem>();
     private Fragment fragment;
 
@@ -57,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void initDrawer(){
+    private void initDrawer() {
 
         //All Drawer Navigation Items initialized
         mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_0), getString(R.string.drawer_description_0), R.mipmap.ic_launcher));
@@ -87,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Initialize fragment, and replace it's content using
     private void initFragment(int position) {
 
-        if(position >= 0 && position < mDrawerItems.size()){
+        if (position >= 0 && position < mDrawerItems.size()) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.mainContent, fragment)
                     .commit();
@@ -120,19 +125,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String title = mDrawerItems.get(position).mTitle.toString();
 
-        if(title.equals(getString(R.string.drawer_title_0))){
+        if (title.equals(getString(R.string.drawer_title_0))) {
             fragment = new HomeFragment();
             initFragment(position);
 
-        }else if(title.equals(getString(R.string.drawer_title_1))){
+        } else if (title.equals(getString(R.string.drawer_title_1))) {
             fragment = new NotificationFragment();
             initFragment(position);
 
-        }else if(title.equals(getString(R.string.drawer_title_2))){
+        } else if (title.equals(getString(R.string.drawer_title_2))) {
             fragment = new BankAccountFragment();
             initFragment(position);
 
-        }else if(title.equals(getString(R.string.drawer_title_3))){
+        } else if (title.equals(getString(R.string.drawer_title_3))) {
             fragment = new AddVehicleFragment();
             initFragment(position);
         }
@@ -204,6 +209,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    public void openDrawer(){
+        mDrawerLayout.openDrawer(Gravity.START);
+    }
 
 }
