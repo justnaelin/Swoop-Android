@@ -7,7 +7,6 @@ import java.util.List;
  * Summary: User Mapper
  */
 
-
 public class User {
     private String userId;
     private String firstName;
