@@ -23,6 +23,8 @@
 
     <!--Drawer Layout-->
     <string name="text_edit_profile">Edit Profile</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
     <!--Drawer List-->
     <string name="drawer_title_0">Home</string>
@@ -42,7 +44,8 @@
     <!--HomeFragment-->
     <string name="main_title_0">Swoops</string>
     <string name="main_title_1">My Swoops</string>
-    <string name="main_title_2">Requested Swoops</string>
+    <string name="requested">Requests</string>
+    <string name="create">Create</string>
 
 
     <!--Facebook Login-->

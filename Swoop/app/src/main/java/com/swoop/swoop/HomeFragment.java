@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,9 @@ import android.widget.Toast;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
-    private Button mCreateSwoopButton, mSwoopButton, mMySwoopButton, mRequestedSwoops;
+    private Button mCreateSwoopButton, mSwoopButton, mMySwoopButton, mRequestedSwoops, mHamburgerButton;
     private Fragment fragment;
+    private DrawerLayout mDrawerLayout;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -36,12 +38,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         mSwoopButton = (Button) view.findViewById(R.id.swoop_button);
         mMySwoopButton = (Button) view.findViewById(R.id.my_swoops_button);
         mRequestedSwoops = (Button) view.findViewById(R.id.requested_swoops_button);
-
+        mHamburgerButton = (Button) view.findViewById(R.id.hamburger_button);
 
         mCreateSwoopButton.setOnClickListener(this);
         mSwoopButton.setOnClickListener(this);
         mMySwoopButton.setOnClickListener(this);
         mRequestedSwoops.setOnClickListener(this);
+        mHamburgerButton.setOnClickListener(this);
+
+
 
         fragment = new SwoopsFragment();
         getFragmentManager().beginTransaction()
@@ -84,6 +89,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         .replace(R.id.home_fragment_container, fragment)
                         .commit();
                 break;
+            case R.id.hamburger_button:
+                // Open navigation drawer
+                ((MainActivity)getActivity()).openDrawer();
+
             default:
                 break;
 
