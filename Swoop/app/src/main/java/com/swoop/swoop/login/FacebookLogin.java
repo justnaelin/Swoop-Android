@@ -18,6 +18,8 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.service.UserService;
+import com.swoop.swoop.CreateUserActivity;
 import com.swoop.swoop.MainActivity;
 
 /**
@@ -47,21 +49,28 @@ public class FacebookLogin extends Activity implements View.OnClickListener{
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("LOGIN_SUCCESS", "Success");
-                        loginButton.setVisibility(View.INVISIBLE); //<- IMPORTANT
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();//<- IMPORTANT
-                        // App code
+                        loginButton.setVisibility(View.INVISIBLE);
+                        AccessToken accessToken = loginResult.getAccessToken();
+                        //for right now this will send any user to the mainActivity without the creation of a new user.
+                        //still working on handling that part
+                        if(UserService.isUser(accessToken.getUserId())) {
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();//<- IMPORTANT
+                        }
+                        else{
+                            Intent intent = new Intent(getBaseContext(), CreateUserActivity.class);
+                            startActivity(intent);
+                            finish();//<- IMPORTANT
+                        }
                     }
                     @Override
                     public void onCancel() {
                         // App
-                        Log.d("CANCEL", "cancel");
+                        Log.d("CANCEL", "cancelled logging in into app");
                     }
                     @Override
                     public void onError(FacebookException exception) {
-                        // App code
-                        Log.d("message: ", "error loggin in");
                         Log.d("ERROR onERROR:", exception.getStackTrace().toString());
                     }
                 });

@@ -39,4 +39,7 @@ public class UserService {
         return null;
 
     }
+    public static boolean isUser(String userId) {
+        return true;
+    }
 }
