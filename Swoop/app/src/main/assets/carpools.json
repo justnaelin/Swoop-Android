@@ -1,0 +1,28 @@
+[
+  {
+    "carpoolId":"12345",
+    "userId":"1313",
+    "endLocation":"New York City",
+    "requestDate":"01-19-16",
+    "startLocation":"Salinas",
+    "rate":13.0,
+    "numberOfPassengers":2,
+    "carpoolStatus":"APPROVED",
+    "isDriver":true,
+    "isCompleted":false,
+    "isDeleted":true
+  },
+  {
+    "carpoolId":"7777",
+    "userId":"1313",
+    "requestDate":"11/19/2016",
+    "startLocation":"Soledad",
+    "endLocation":"Salinas",
+    "rate":3.45,
+    "numberOfPassengers":4,
+    "carpoolStatus":"APPROVED",
+    "isDriver":false,
+    "isCompleted":false,
+    "isDeleted":false
+  }
+]
