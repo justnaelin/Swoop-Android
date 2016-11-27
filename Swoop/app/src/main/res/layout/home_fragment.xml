@@ -10,45 +10,61 @@
 
         <!-- Button Layout -->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_weight="1">
+            android:background="@color/colorPrimary"
+            android:layout_weight="1"
+            android:gravity="center">
 
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/hamburger_button"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_hamburger"
+          />
+
+            <Button
                 android:id="@+id/swoop_button"
-                android:drawableTop="@mipmap/ic_launcher"
-                android:textSize="4pt"
-                android:text="@string/main_title_0" />
-
-            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_swoops"
+                android:text="@string/main_title_0"
+                android:textSize="4pt" />
+
+            <Button
                 android:id="@+id/my_swoops_button"
-                android:drawableTop="@mipmap/ic_launcher"
-                android:textSize="4pt"
-                android:text="@string/main_title_1"/>
-
-            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_my_swoops"
+                android:text="@string/main_title_1"
+                android:textSize="4pt"/>
+
+            <Button
                 android:id="@+id/requested_swoops_button"
-                android:drawableTop="@mipmap/ic_launcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_requested"
+                android:text="@string/requested"
                 android:textSize="4pt"
-                android:text="@string/main_title_2"
-                android:layout_weight="1"
                 />
 
             <Button
+                android:id="@+id/create_swoop_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/create_swoop_button"
-                android:drawableTop="@mipmap/ic_launcher"
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_create"
+                android:text="@string/create"
                 android:textSize="4pt"
-                android:text="Create Swoop"/>
+
+                />
 
         </LinearLayout>
 
@@ -58,15 +74,14 @@
             android:id="@+id/home_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/button_layout">
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
         </RelativeLayout>
 
 
     </RelativeLayout>
-
-
-
 
 
 </FrameLayout>

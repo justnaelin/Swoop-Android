@@ -1,11 +1,21 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/com_facebook_button_background_color_focused_disabled</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorForeground">@color/com_facebook_button_background_color_focused
+        </item>
+        <item name="android:textColorPrimary">?android:attr/textColorPrimaryInverse</item>
+    </style>
+
+    <style name="Swoop" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:colorForeground">@color/cardview_light_background</item>
+        <item name="android:textColorPrimary">@color/cardview_light_background</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
