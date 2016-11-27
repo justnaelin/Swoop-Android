@@ -8,7 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorForeground">@color/com_facebook_button_background_color_focused
         </item>
-        <item name="android:textColorPrimary">?android:attr/textColorPrimaryInverse</item>
+        <item name="android:textColorPrimary">@android:color/tertiary_text_light</item>
+        <item name="android:textColorPrimaryInverse">@android:color/tertiary_text_light</item>
+        <item name="android:textColorSecondaryInverse">@android:color/tertiary_text_light</item>
+        <item name="android:textColorSecondary">@android:color/tertiary_text_light</item>
     </style>
 
     <style name="Swoop" parent="Theme.AppCompat.Light.NoActionBar" >

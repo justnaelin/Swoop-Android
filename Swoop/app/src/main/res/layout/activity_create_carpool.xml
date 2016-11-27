@@ -19,7 +19,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/submit_button"
-        android:textColor="@color/place_autocomplete_prediction_secondary_text"
         android:background="@drawable/rounded_corners"
         />
 
@@ -96,7 +95,6 @@
                 android:text="Date"
                 android:paddingLeft="1pt"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/place_autocomplete_prediction_secondary_text"
                 android:background="@drawable/rounded_corners"
                 />
 
@@ -105,7 +103,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time"
-                android:textColor="@color/place_autocomplete_prediction_secondary_text"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_corners"
                 />
