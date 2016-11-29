@@ -3,7 +3,7 @@ apply plugin: 'jacoco-android'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.swoop.swoop"
@@ -42,6 +42,12 @@ android {
 
     dataBinding {
         enabled = true
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-annotations:23.1.1'
     }
 }
 dependencies {
@@ -83,6 +89,9 @@ dependencies {
 
     // Picasso
     compile 'com.squareup.picasso:picasso:2.5.0'
+
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+
 
 
 }
