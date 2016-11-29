@@ -94,8 +94,9 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
         locationFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                mLocation = place.getLatLng().toString();
-                Log.i(TAG, "Place:" + place.getLatLng());
+                mLocation = place.getLatLng().toString().replace("(", "")
+                        .replace(")", "").substring(9);
+                Log.i(TAG, "Place:" + mLocation);
             }
 
             @Override
@@ -109,8 +110,9 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
         destinationFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                mDestination = place.getLatLng().toString();
-                Log.i(TAG, "Place:" + place.getLatLng());
+                mDestination = place.getLatLng().toString().toString().replace("(", "")
+                        .replace(")", "").substring(9);
+                Log.i(TAG, "Place:" + mDestination);
             }
 
             @Override
