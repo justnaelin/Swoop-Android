@@ -33,18 +33,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.home_fragment, container, false);
+        initiateDrawerItems(view);
 
-        mCreateSwoopButton = (Button) view.findViewById(R.id.create_swoop_button);
-        mSwoopButton = (Button) view.findViewById(R.id.swoop_button);
-        mMySwoopButton = (Button) view.findViewById(R.id.my_swoops_button);
-        mRequestedSwoops = (Button) view.findViewById(R.id.requested_swoops_button);
-        mHamburgerButton = (Button) view.findViewById(R.id.hamburger_button);
+        /**
+         *  Make sure we get the users current location
+         *  TODO: Use the users location to map all swoops 50miles away.
+         */
 
-        mCreateSwoopButton.setOnClickListener(this);
-        mSwoopButton.setOnClickListener(this);
-        mMySwoopButton.setOnClickListener(this);
-        mRequestedSwoops.setOnClickListener(this);
-        mHamburgerButton.setOnClickListener(this);
+        /**
+         *  TODO: Later add filters (Start location, End Location)
+         */
+
+
 
 
 
@@ -56,6 +56,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void initiateDrawerItems(View view) {
+        mCreateSwoopButton = (Button) view.findViewById(R.id.create_swoop_button);
+        mSwoopButton = (Button) view.findViewById(R.id.swoop_button);
+        mMySwoopButton = (Button) view.findViewById(R.id.my_swoops_button);
+        mRequestedSwoops = (Button) view.findViewById(R.id.requested_swoops_button);
+        mHamburgerButton = (Button) view.findViewById(R.id.hamburger_button);
+
+        mCreateSwoopButton.setOnClickListener(this);
+        mSwoopButton.setOnClickListener(this);
+        mMySwoopButton.setOnClickListener(this);
+        mRequestedSwoops.setOnClickListener(this);
+        mHamburgerButton.setOnClickListener(this);
     }
 
 
