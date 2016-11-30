@@ -5,7 +5,10 @@ import android.util.Log;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.apache.http.Header;
 /**
- * Created by ychino on 11/29/16.
+ * AsyncSwoopResponseHandler
+ *
+ * @author Yarely Chino
+ * @version 1.0
  */
 
 public class AsyncSwoopResponseHandler extends AsyncHttpResponseHandler{

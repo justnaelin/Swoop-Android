@@ -88,7 +88,7 @@ public class CarpoolService {
         return null;
     }
 
-    public static String verifyCreate(String userId, String startLocation,
+    public static String verifyCreate(String startLocation,
                                       String endLocation, String requestDate, String rate,
                                       String numberOfPassengers, CarpoolStatus carpoolStatus,
                                       boolean isDriver) {
@@ -96,7 +96,7 @@ public class CarpoolService {
         if (validateResponse.equals(VALID)) {
 
             RequestParams params = new RequestParams();
-            params.put(USER_ID, userId);
+            params.put(USER_ID, "123456");
             params.put(START_LOCATION, startLocation);
             params.put(END_LOCATION, endLocation);
             params.put(REQUEST_DATE, requestDate);
@@ -145,5 +145,12 @@ public class CarpoolService {
     }
 
 
+    public static void retrieveRequestedCarpoolsUsingUserId(String id){
+
+        RequestParams params = new RequestParams();
+        params.put(USER_ID, id);
+
+        CarpoolResource.retrieveRequestedByUser(params);
+    }
 
 }
