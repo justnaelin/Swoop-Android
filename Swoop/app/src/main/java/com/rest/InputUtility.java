@@ -30,5 +30,15 @@ public final class InputUtility {
         return (Double.valueOf(string) >= 0 )? true : false;
     }
 
+    /**
+     * Typecast Boolean to String
+     *
+     * @param //Object
+     * @return null if boolean is null, and string typecast if boolean is true or false
+     */
+    public static String valueOf(Object obj) {
+        return (obj == null) ? "null" : obj.toString();
+    }
+
 
 }
