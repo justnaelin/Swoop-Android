@@ -20,7 +20,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.login.LoginManager;
 import com.swoop.swoop.login.FacebookLogin;
 
 import java.util.ArrayList;
@@ -143,9 +142,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragment = new AddVehicleFragment();
             initFragment(position);
         } else if (title.equals(getString(R.string.drawer_title_4))) {
-            LoginManager.getInstance().logOut();
-            Intent intent = new Intent(getBaseContext(), FacebookLogin.class);
-            startActivity(intent);
+            //LoginManager.getInstance().logOut();
+            //Intent intent = new Intent(getBaseContext(), FacebookLogin.class);
+            //startActivity(intent);
+            FacebookLogin.logout();
+            Intent login = new Intent(getBaseContext(), FacebookLogin.class);
+            startActivity(login);
+            finish();
         }
 
         // Close the drawer
