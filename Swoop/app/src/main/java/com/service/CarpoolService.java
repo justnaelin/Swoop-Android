@@ -1,6 +1,7 @@
 package com.service;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.rest.CarpoolResource;
@@ -38,7 +39,8 @@ public class CarpoolService {
     public static final String CREATE_END_POINT = "http://10.0.2.2:8080/rest/carpool/create";
     public static final String UPDATE_END_POINT = "http://10.0.2.2:8080/rest/carpool/update";
     public static final String DELETE_END_POINT = "http://10.0.2.2:8080/rest/carpool/delete";
-    public static final String RETRIEVE_BY_USER_END_POINT = "http://10.0.2.2:8080/rest/carpool/userId";
+    public static final String RETRIEVE_CREATED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/retrieve/userId";
+    public static final String RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/retrieve/userId2";
     public static final String VALID = "VALID";
 
     public static boolean createCarpool(Carpool carpool) {
@@ -86,68 +88,30 @@ public class CarpoolService {
         return null;
     }
 
-    public static String verifyCreate(String carpoolId, String userId, String startLocation,
-                                    String endLocation, String requestDate, String rate,
-                                    String numberOfPassengers, CarpoolStatus carpoolStatus,
-                                    boolean isDriver) {
+    public static String verifyCreate(String startLocation,
+                                      String endLocation, String requestDate, String rate,
+                                      String numberOfPassengers, CarpoolStatus carpoolStatus,
+                                      boolean isDriver) {
         String validateResponse = validateCreate(rate, numberOfPassengers, carpoolStatus);
         if (validateResponse.equals(VALID)) {
 
             RequestParams params = new RequestParams();
-
-            params.put(CARPOOL_ID, carpoolId);
-            params.put(USER_ID, userId);
+            params.put(USER_ID, "123456");
             params.put(START_LOCATION, startLocation);
             params.put(END_LOCATION, endLocation);
             params.put(REQUEST_DATE, requestDate);
             params.put(RATE, rate);
             params.put(NUMBER_OF_PASSENGERS, numberOfPassengers);
-            params.put(CARPOOL_STATUS, carpoolStatus);
-            params.put(IS_DRIVER, isDriver);
-            params.put(IS_COMPLETED, false);
-            params.put(IS_DELETED, false);
+            params.put(CARPOOL_STATUS, carpoolStatus.toString());
+            params.put(IS_DRIVER, InputUtility.valueOf(isDriver));
+            params.put(IS_COMPLETED, "false");
+            params.put(IS_DELETED, "false");
 
+            Log.d("CarpoolService","Before crating the request in parameters " + carpoolStatus.toString() + params.toString());
             CarpoolResource.createRequest(params);
 
         }
         return validateResponse;
-    }
-
-
-    /**
-     * Checks for input carpool validation for all fields
-     *
-     * @return true if all information is valid, false if there is invalid information.
-     */
-    private static String validateCreate(String carpoolId, String userId, String startLocation,
-                                          String endLocation, String requestDate, String rate,
-                                          String numberOfPassengers, CarpoolStatus carpoolStatus,
-                                          boolean isDriver) {
-
-        if (InputUtility.isNotNull(carpoolId) &&
-                InputUtility.isNotNull(userId) &&
-                InputUtility.isNotNull(startLocation) &&
-                InputUtility.isNotNull(endLocation) &&
-                InputUtility.isNotNull(requestDate) && carpoolStatus.toString() == CarpoolStatus.PENDING.toString()) {
-
-            try {
-                Integer.valueOf(numberOfPassengers);
-            } catch (NumberFormatException e) {
-                return "Please, enter a valid passanger number";
-
-            }
-
-            try {
-                Double.valueOf(rate);
-                return VALID;
-
-            } catch (NumberFormatException e) {
-                return "Please, enter a valid rate value";
-            }
-
-        }
-
-       return "Please enter all fields";
     }
 
 
@@ -157,8 +121,8 @@ public class CarpoolService {
      * @return a string validation message, if all information is valid or invalid.
      */
     private static String validateCreate(String rate,
-                                          String numberOfPassengers,
-                                          CarpoolStatus carpoolStatus) {
+                                         String numberOfPassengers,
+                                         CarpoolStatus carpoolStatus) {
 
         if (carpoolStatus.toString() == CarpoolStatus.PENDING.toString()) {
 
@@ -181,5 +145,12 @@ public class CarpoolService {
     }
 
 
+    public static void retrieveRequestedCarpoolsUsingUserId(String id){
+
+        RequestParams params = new RequestParams();
+        params.put(USER_ID, id);
+
+        CarpoolResource.retrieveRequestedByUser(params);
+    }
 
 }

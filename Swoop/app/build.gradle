@@ -44,6 +44,7 @@ android {
         enabled = true
     }
 }
+
 dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -83,6 +84,10 @@ dependencies {
 
     // Picasso
     compile 'com.squareup.picasso:picasso:2.5.0'
+
+
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+
 
 
 }

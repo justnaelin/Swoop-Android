@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit_button"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="50dp"
         android:padding="10dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="@string/text_input_location"
             android:textSize="10pt"
-            android:paddingTop="7pt"/>
+            android:paddingTop="10pt"/>
 
             <TextView
                 android:id="@+id/text_input_destination"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_input_destination"
                 android:textSize="10pt"
-                android:paddingTop="7pt"/>
+                android:paddingTop="10pt"/>
 
 
             <TextView
@@ -66,8 +66,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_input_max_people"
-                android:textSize="10pt"
-                android:paddingTop="7pt"/>
+                android:textSize="12pt"
+                android:paddingTop="10pt"/>
 
             <TextView
                 android:id="@+id/text_input_rate"
@@ -75,8 +75,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_input_rate"
-                android:textSize="10pt"
-                android:paddingTop="7pt"/>
+                android:textSize="12pt"
+                android:paddingTop="10pt"/>
 
 
             <TextView
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_input_user"
                 android:textSize="10pt"
-                android:paddingTop="7pt"/>
+                android:paddingTop="10pt"/>
 
             <Button
                 android:id="@+id/button_date"
@@ -94,7 +94,8 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:paddingLeft="1pt"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5pt"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/rounded_corners"
                 />
 
@@ -103,7 +104,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5pt"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/rounded_corners"
                 />
 
@@ -150,14 +152,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="@string/hint_max_people" />
+                android:hint="@string/hint_max_people"
+                android:paddingTop="5pt"/>
 
             <EditText android:id="@+id/input_rate"
                 android:inputType="numberDecimal"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_rate"/>
+                android:hint="@string/hint_rate"
+                android:paddingTop="9pt"/>
 
             <!--Radio Buttons for Driver or Passanger-->
             <RadioGroup
@@ -184,16 +188,16 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/in_date"
-                android:textSize="9pt"
-                android:layout_marginTop="8dp"
+                android:textSize="10pt"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/in_time"
-                android:textSize="9pt"
-                android:layout_marginTop="15dp"/>
+                android:textSize="10pt"
+                android:layout_marginTop="30dp"/>
 
 
 

@@ -156,6 +156,7 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
     }
 
 
+
     /**
      * Implementation for View.onClickListener
      *
@@ -167,59 +168,13 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
         // Check what was clicked
         switch (v.getId()) {
             case R.id.button_date:
-                // Get Current Date
-                final Calendar date = Calendar.getInstance();
-
-                // Create a Date Picker Dialog with onDateSet method
-                DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                mTxtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                            }
-                        }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
-
-                // Launch Date Picker Dialog
-                datePickerDialog.show();
+                getDate();
                 break;
             case R.id.button_time:
-                // Get Current Time
-                final Calendar time = Calendar.getInstance();
-
-
-                // Create a Time Picker Dialog with onDateSet method
-                TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                        new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-                                mTxtTime.setText(hourOfDay + ":" + minute);
-                            }
-                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), false);
-
-                // Launch Time Picker Dialog
-                timePickerDialog.show();
+                getTime();
                 break;
             case R.id.submit_button:
-
-                //Service will verify any information :
-                // TODO: check if you can do this in a different thread
-
-                if (checkEmptyFields()) {
-                    String response = CarpoolService.verifyCreate("123097", "23334",
-                            mLocation,
-                            mDestination,
-                            mTxtDate.getText().toString() + " , " + mTxtTime.getText().toString(),
-                            mInputRate.getText().toString(),
-                            mInputMaxPeople.getText().toString(),
-                            CarpoolStatus.PENDING,
-                            isDriver);
-                    createToast(response);
-                }
+                serviceVerify();
                 break;
             case R.id.radio_passanger:
                 isDriver = false;
@@ -227,6 +182,64 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
             case R.id.radio_driver:
                 isDriver = true;
                 break;
+        }
+
+    }
+
+
+    private void getDate(){
+        // Get Current Date
+        final Calendar date = Calendar.getInstance();
+
+        // Create a Date Picker Dialog with onDateSet method
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        mTxtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+
+        // Launch Date Picker Dialog
+        datePickerDialog.show();
+    }
+
+    private void getTime(){
+        // Get Current Time
+        final Calendar time = Calendar.getInstance();
+
+        // Create a Time Picker Dialog with onDateSet method
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+                        mTxtTime.setText(hourOfDay + ":" + minute);
+                    }
+                }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), false);
+
+        // Launch Time Picker Dialog
+        timePickerDialog.show();
+
+    }
+
+    private void serviceVerify(){
+
+        if (checkEmptyFields()) {
+
+            String response = CarpoolService.verifyCreate(
+                    mLocation,
+                    mDestination,
+                    mTxtDate.getText().toString() + " , " + mTxtTime.getText().toString(),
+                    mInputRate.getText().toString(),
+                    mInputMaxPeople.getText().toString(),
+                    CarpoolStatus.PENDING,
+                    isDriver);
+            createToast(response);
         }
 
     }

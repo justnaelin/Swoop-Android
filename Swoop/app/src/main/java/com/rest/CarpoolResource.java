@@ -66,17 +66,13 @@ public final class CarpoolResource {
      */
     public static void createRequest(RequestParams params) {
 
-        /*TODO: fix create endpoint 
-        Status: current endpoint gets error code 400:
-         */
-
         // Instantiate Http Request Param Object
         AsyncHttpClient client = new AsyncHttpClient();
 
-        //retreiveRequest("123456"); check if endpoint retreive works
-
         //CREATE REQUEST
-        client.get(CarpoolService.CREATE_END_POINT, params, CarpoolResource.executeResponseHandler());
+       // client.get(CarpoolService.CREATE_END_POINT, params, CarpoolResource.executeResponseHandler());
+        client.get(CarpoolService.CREATE_END_POINT, params, new AsyncSwoopResponseHandler());
+
     }
 
     /**
@@ -94,13 +90,13 @@ public final class CarpoolResource {
     /**
      * Performs the request call to access the retrieve by user UPDATE endpoint.
      */
-    public static void retrieveByUser(RequestParams params) {
+    public static void retrieveRequestedByUser(RequestParams params) {
 
         // Instantiate Http Request Param Object
         AsyncHttpClient client = new AsyncHttpClient();
 
-        //UPDATE REQUEST
-        client.get(CarpoolService.RETRIEVE_BY_USER_END_POINT, params, CarpoolResource.executeResponseHandler());
+        //RETRIEVE BY USERID
+        client.get(CarpoolService.RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID, params, CarpoolResource.executeResponseHandler());
     }
 
 }
