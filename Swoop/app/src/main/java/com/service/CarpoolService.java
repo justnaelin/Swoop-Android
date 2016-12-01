@@ -39,9 +39,11 @@ public class CarpoolService {
     public static final String CREATE_END_POINT = "http://10.0.2.2:8080/rest/carpool/create";
     public static final String UPDATE_END_POINT = "http://10.0.2.2:8080/rest/carpool/update";
     public static final String DELETE_END_POINT = "http://10.0.2.2:8080/rest/carpool/delete";
-    public static final String RETRIEVE_CREATED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/retrieve/userId";
-    public static final String RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/retrieve/userId2";
+    public static final String RETRIEVE_CREATED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/carpool/retrieve/userId";
+    public static final String RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/carpool/retrieve/userId2";
     public static final String VALID = "VALID";
+    public static final String USER_TEMP_ID = "000000001";
+
 
     public static boolean createCarpool(Carpool carpool) {
 
@@ -96,7 +98,7 @@ public class CarpoolService {
         if (validateResponse.equals(VALID)) {
 
             RequestParams params = new RequestParams();
-            params.put(USER_ID, "123456");
+            params.put(USER_ID, USER_TEMP_ID);
             params.put(START_LOCATION, startLocation);
             params.put(END_LOCATION, endLocation);
             params.put(REQUEST_DATE, requestDate);
@@ -145,7 +147,7 @@ public class CarpoolService {
     }
 
 
-    public static void retrieveRequestedCarpoolsUsingUserId(String id){
+    public static void executeRequestedCarpoolByUser(String id){
 
         RequestParams params = new RequestParams();
         params.put(USER_ID, id);
@@ -153,4 +155,11 @@ public class CarpoolService {
         CarpoolResource.retrieveRequestedByUser(params);
     }
 
+    public static void executeCreatedCarpoolByUser(String id){
+
+        RequestParams params = new RequestParams();
+        params.put(USER_ID, id);
+
+        CarpoolResource.retrieveCreatedByUser(params);
+    }
 }

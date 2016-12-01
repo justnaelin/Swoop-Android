@@ -2,13 +2,19 @@ package com.rest;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.ResponseHandlerInterface;
+import com.mapping.Carpool;
 import com.service.CarpoolService;
+import com.swoop.swoop.CarpoolAdapterSingleton;
 
-import cz.msebera.android.httpclient.Header;
+import org.apache.http.Header;
+
+import java.util.List;
 
 /**
  * Carpool Resource (Model)
@@ -20,17 +26,80 @@ import cz.msebera.android.httpclient.Header;
 
 public final class CarpoolResource {
 
+    /**
+     * Handles the create carpools by user response
+     */
+    private static ResponseHandlerInterface retrieveCarpoolsByUserResponseHandler() {
+        return new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+
+                if (statusCode == 200 && responseBody != null) {
+                    Log.d("Carpool retre success", "Response code " + statusCode + new String(responseBody) + "\n");
+
+                    //Access the Carpool Adapter Singleton Instance to update the list view
+                    CarpoolAdapterSingleton requestedCarpoolData = CarpoolAdapterSingleton.getInstance(null);
+
+                    //Converts the JSON string to a list of Carpools
+                    List<Carpool> carpoolList = new Gson().fromJson(new String(responseBody), new TypeToken<List<Carpool>>() {
+                    }.getType());
+
+                    //Singles the adapter to update the view
+                    requestedCarpoolData.updateView(carpoolList);
+                }else{
+                    Log.d("CarpoolResource success", "Response code" + statusCode + "\n");
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + error.toString() + "\n");
+
+            }
+        };
+    }
+
+    /**
+     * Handles the create carpools by user
+     */
+    private static ResponseHandlerInterface createCarpoolHandler() {
+        return new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200 && responseBody != null) {
+                    Log.d("CarpoolResource success", "Response code" + statusCode + new String(responseBody) + "\n");
+
+                }else{
+                    Log.d("Carpool success null", "Response code" + statusCode + "\n");
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + error.toString() + "\n");
+
+            }
+        };
+    }
 
     private static ResponseHandlerInterface executeResponseHandler() {
         return new AsyncHttpResponseHandler() {
 
-//           @Override
+            @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d("CreateCarpoolActivity", "Response code" + statusCode + " " + new String(responseBody));
+                Log.d("CarpoolResource success", "Response code" + statusCode + " " + new String(responseBody) + "\n");
+
             }
-//            @Override
+
+            @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("CreateCarpoolActivity", "Response error code" + statusCode + " " + new String(responseBody) + " after the body");
+                Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + "\n");
+
             }
         };
     }
@@ -70,8 +139,8 @@ public final class CarpoolResource {
         AsyncHttpClient client = new AsyncHttpClient();
 
         //CREATE REQUEST
-       // client.get(CarpoolService.CREATE_END_POINT, params, CarpoolResource.executeResponseHandler());
-        client.get(CarpoolService.CREATE_END_POINT, params, new AsyncSwoopResponseHandler());
+        client.get(CarpoolService.CREATE_END_POINT, params, CarpoolResource.createCarpoolHandler());
+        // client.get(CarpoolService.CREATE_END_POINT, params, new AsyncCarpoolResponseHandler());
 
     }
 
@@ -88,7 +157,7 @@ public final class CarpoolResource {
     }
 
     /**
-     * Performs the request call to access the retrieve by user UPDATE endpoint.
+     * Performs the request call to access the requested carpools by user
      */
     public static void retrieveRequestedByUser(RequestParams params) {
 
@@ -96,7 +165,21 @@ public final class CarpoolResource {
         AsyncHttpClient client = new AsyncHttpClient();
 
         //RETRIEVE BY USERID
-        client.get(CarpoolService.RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID, params, CarpoolResource.executeResponseHandler());
+        client.get(CarpoolService.RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID, params, CarpoolResource.retrieveCarpoolsByUserResponseHandler());
     }
+
+
+    /**
+     * Performs the request call to access carpools created by user
+     */
+    public static void retrieveCreatedByUser(RequestParams params) {
+
+        // Instantiate Http Request Param Object
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        //RETRIEVE BY USERID
+        client.get(CarpoolService.RETRIEVE_CREATED_CARPOOLS_BY_USER_ID, params, CarpoolResource.retrieveCarpoolsByUserResponseHandler());
+    }
+
 
 }

@@ -18,7 +18,7 @@ import android.widget.Toast;
  * @version 1.0
  */
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private Button mCreateSwoopButton, mSwoopButton, mMySwoopButton, mRequestedSwoops, mHamburgerButton;
     private Fragment fragment;
@@ -43,9 +43,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         /**
          *  TODO: Later add filters (Start location, End Location)
          */
-
-
-
 
 
         fragment = new SwoopsFragment();
@@ -105,7 +102,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.hamburger_button:
                 // Open navigation drawer
-                ((MainActivity)getActivity()).openDrawer();
+                ((MainActivity) getActivity()).openDrawer();
 
             default:
                 break;
