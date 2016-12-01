@@ -31,7 +31,7 @@
     <string name="drawer_title_1">Notification</string>
     <string name="drawer_title_2">Bank Account</string>
     <string name="drawer_title_3">Add Vehicle</string>
-    <string name="drawer_title_4">Log Out</string>
+    <string name="drawer_title_4">Settings</string>
 
     <string name="drawer_description_0">Main page</string>
     <string name="drawer_description_1">View notifications</string>

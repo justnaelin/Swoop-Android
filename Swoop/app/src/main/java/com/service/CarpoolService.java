@@ -42,6 +42,8 @@ public class CarpoolService {
     public static final String RETRIEVE_CREATED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/carpool/retrieve/userId";
     public static final String RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/carpool/retrieve/userId2";
     public static final String VALID = "VALID";
+    public static final String USER_TEMP_ID = "000000001";
+
 
     public static boolean createCarpool(Carpool carpool) {
 
@@ -96,7 +98,7 @@ public class CarpoolService {
         if (validateResponse.equals(VALID)) {
 
             RequestParams params = new RequestParams();
-            params.put(USER_ID, "123456");
+            params.put(USER_ID, USER_TEMP_ID);
             params.put(START_LOCATION, startLocation);
             params.put(END_LOCATION, endLocation);
             params.put(REQUEST_DATE, requestDate);

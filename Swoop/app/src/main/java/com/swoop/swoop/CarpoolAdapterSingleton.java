@@ -17,6 +17,7 @@ import java.util.List;
 
 public class CarpoolAdapterSingleton {
 
+    //Keeps track of the working adapter(Controller)
     private CarpoolAdapter adapter;
     private static CarpoolAdapterSingleton requestedCarpoolAdapterSingleton;
 
@@ -24,25 +25,45 @@ public class CarpoolAdapterSingleton {
         this.adapter = adapter;
     }
 
-
+    /**
+     * Reference a single CarpoolAdapterSingleton instance and returns that reference
+     *
+     * @return new CarpoolInstance if no current reference, else it returns is reference.
+     */
     public static CarpoolAdapterSingleton getInstance(CarpoolAdapter adapter) {
 
         if (requestedCarpoolAdapterSingleton == null) {
             requestedCarpoolAdapterSingleton = new CarpoolAdapterSingleton(adapter);
         }
         Log.d("RequestedSingleton", "getInstance\n");
-
         return requestedCarpoolAdapterSingleton;
     }
 
+    /**
+     * Execute the CreatedCarpool by user endpoint
+     */
     public void executeCreatedCarpoolByUser() {
-        CarpoolService.executeCreatedCarpoolByUser("123456");
+
+        /*
+        TODO: need to retrieve unique user id using the Facebook login
+        */
+        CarpoolService.executeCreatedCarpoolByUser(CarpoolService.USER_TEMP_ID);
     }
 
+    /**
+     * Execute the RequestedCarpool by user endpoint
+     */
     public void executeRequestedCarpoolByUser() {
-        CarpoolService.executeRequestedCarpoolByUser("123456");
+        /*
+        TODO: need to retrieve unique user id using the Facebook login
+        */
+        CarpoolService.executeRequestedCarpoolByUser(CarpoolService.USER_TEMP_ID);
     }
 
+
+    /**
+     * Signals the Adapter to update the view with new content
+     */
     public void updateView(List<Carpool> requestedCarpools) {
 
         Log.d("RequestedCarpoolAdapter", adapter.toString());
@@ -52,6 +73,10 @@ public class CarpoolAdapterSingleton {
         }
     }
 
+
+    /**
+     * Destroys the singleton since new view was created, note: this is to dereference the existing adapter
+     */
     public static void destroySingleton(){
         requestedCarpoolAdapterSingleton = null;
     }
