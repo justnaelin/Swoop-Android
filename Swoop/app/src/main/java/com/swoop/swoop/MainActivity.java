@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.swoop.swoop.login.FacebookLogin;
 
@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ListView mDrawerList;
     private RelativeLayout mDrawerPanel;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
+    private static DrawerLayout mDrawerLayout;
     private ArrayList<DrawerItem> mDrawerItems = new ArrayList<DrawerItem>();
     private Fragment fragment;
+    private RelativeLayout mProfilePanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //will always initialize the first fragment to home
         initFragment(0);
 
+        // Allow user to access ProfileActivity
+        mProfilePanel = (RelativeLayout) findViewById(R.id.relative_layout_in_drawer);
+        mProfilePanel.setOnClickListener(this);
 
     }
 
@@ -115,6 +118,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Check what was clicked
         switch (v.getId()) {
 
+            case R.id.relative_layout_in_drawer:
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.mainContent, new ProfileFragment())
+                        .commit();
+                mDrawerLayout.closeDrawer(mDrawerPanel);
+                break;
+
         }
     }
 
@@ -140,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             initFragment(position);
 
         } else if (title.equals(getString(R.string.drawer_title_3))) {
-            fragment = new AddVehicleFragment();
+            fragment = new ProfileFragment();
             initFragment(position);
         } else if (title.equals(getString(R.string.drawer_title_4))) {
             LoginManager.getInstance().logOut();
@@ -152,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawerLayout.closeDrawer(mDrawerPanel);
     }
 
-    public void openDrawer() {
+    public static void openDrawer() {
         mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
