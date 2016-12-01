@@ -57,7 +57,13 @@ public final class CarpoolResource {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + error.toString() + "\n");
+                if(responseBody != null){
+                    Log.d("CarpoolResource Failure", "Response code" + statusCode + error.toString() + "\n");
+
+                }else{
+                    Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + error.toString() + "\n");
+
+                }
 
             }
         };
@@ -81,8 +87,13 @@ public final class CarpoolResource {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + error.toString() + "\n");
+                if(responseBody != null){
+                    Log.d("CarpoolResource Failure", "Response code" + statusCode + error.toString() + "\n");
 
+                }else{
+                    Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + error.toString() + "\n");
+
+                }
             }
         };
     }
@@ -92,14 +103,25 @@ public final class CarpoolResource {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d("CarpoolResource success", "Response code" + statusCode + " " + new String(responseBody) + "\n");
+                if(responseBody != null){
+                    Log.d("CarpoolResource success", "Response code" + statusCode + " " + new String(responseBody) + "\n");
+
+                }else{
+                    Log.d("CarpoolResource success", "Response code" + statusCode + "\n");
+
+                }
 
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + "\n");
+                if(responseBody != null){
+                    Log.d("CarpoolResource Failure", "Response code" + statusCode + error.toString() + "\n");
 
+                }else{
+                    Log.d("CarpoolResource Failure", "Response code" + statusCode + new String(responseBody) + error.toString() + "\n");
+
+                }
             }
         };
     }
