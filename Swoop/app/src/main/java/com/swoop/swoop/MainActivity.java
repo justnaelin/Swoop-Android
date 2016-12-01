@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +19,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
+=======
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
+>>>>>>> 5c1320f1685fbeef6f3435fd8c8ff183840e732f
 import com.swoop.swoop.login.FacebookLogin;
 
 import java.util.ArrayList;
@@ -28,10 +33,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ListView mDrawerList;
     private RelativeLayout mDrawerPanel;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
+    private static DrawerLayout mDrawerLayout;
     private ArrayList<DrawerItem> mDrawerItems = new ArrayList<DrawerItem>();
     private Fragment fragment;
+    private RelativeLayout mProfilePanel;
+    private ImageView mAvatarImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +67,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initFragment(0);
 
 
+
     }
 
     private void initDrawer() {
+        // Allow user to access ProfileActivity
+        mProfilePanel = (RelativeLayout) findViewById(R.id.relative_layout_in_drawer);
+        mProfilePanel.setOnClickListener(this);
+        mAvatarImageView = (ImageView)findViewById(R.id.avatar);
+        Picasso.with(this).load("https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-256.png").placeholder(R.mipmap.ic_launcher).into(mAvatarImageView);
 
         //All Drawer Navigation Items initialized
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_0), getString(R.string.drawer_description_0), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_1), getString(R.string.drawer_description_1), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_2), getString(R.string.drawer_description_2), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_3), getString(R.string.drawer_description_3), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_4), getString(R.string.drawer_description_4), R.mipmap.ic_launcher));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_0), R.drawable.ic_waffle));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_1),R.drawable.ic_notification));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_2), R.drawable.ic_bank));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_3), R.drawable.ic_vehicle));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_4), R.drawable.ic_settings));
 
         // Initializing DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -114,6 +126,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Check what was clicked
         switch (v.getId()) {
 
+            case R.id.relative_layout_in_drawer:
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.mainContent, new ProfileFragment())
+                        .commit();
+                mDrawerLayout.closeDrawer(mDrawerPanel);
+                break;
+
         }
     }
 
@@ -139,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             initFragment(position);
 
         } else if (title.equals(getString(R.string.drawer_title_3))) {
-            fragment = new AddVehicleFragment();
+            fragment = new ProfileFragment();
             initFragment(position);
         } else if (title.equals(getString(R.string.drawer_title_4))) {
             //LoginManager.getInstance().logOut();
@@ -155,19 +174,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawerLayout.closeDrawer(mDrawerPanel);
     }
 
-    public void openDrawer() {
+    public static void openDrawer() {
         mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
     //Inner class model to populate the Drawer Items
     class DrawerItem {
         String mTitle;
-        String mSubtitle;
         int mIcon;
 
-        public DrawerItem(String title, String subtitle, int icon) {
+        public DrawerItem(String title, int icon) {
             mTitle = title;
-            mSubtitle = subtitle;
             mIcon = icon;
         }
     }
@@ -211,11 +228,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             TextView titleView = (TextView) view.findViewById(R.id.title);
-            TextView subtitleView = (TextView) view.findViewById(R.id.subTitle);
             ImageView iconView = (ImageView) view.findViewById(R.id.icon);
 
             titleView.setText(mDrawerItems.get(position).mTitle);
-            subtitleView.setText(mDrawerItems.get(position).mSubtitle);
             iconView.setImageResource(mDrawerItems.get(position).mIcon);
 
             return view;
