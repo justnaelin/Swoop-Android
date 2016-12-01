@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
 import com.swoop.swoop.login.FacebookLogin;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<DrawerItem> mDrawerItems = new ArrayList<DrawerItem>();
     private Fragment fragment;
     private RelativeLayout mProfilePanel;
+    private ImageView mAvatarImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,20 +63,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //will always initialize the first fragment to home
         initFragment(0);
 
-        // Allow user to access ProfileActivity
-        mProfilePanel = (RelativeLayout) findViewById(R.id.relative_layout_in_drawer);
-        mProfilePanel.setOnClickListener(this);
+
 
     }
 
     private void initDrawer() {
+        // Allow user to access ProfileActivity
+        mProfilePanel = (RelativeLayout) findViewById(R.id.relative_layout_in_drawer);
+        mProfilePanel.setOnClickListener(this);
+        mAvatarImageView = (ImageView)findViewById(R.id.avatar);
+        Picasso.with(this).load("https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-256.png").placeholder(R.mipmap.ic_launcher).into(mAvatarImageView);
 
         //All Drawer Navigation Items initialized
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_0), getString(R.string.drawer_description_0), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_1), getString(R.string.drawer_description_1), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_2), getString(R.string.drawer_description_2), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_3), getString(R.string.drawer_description_3), R.mipmap.ic_launcher));
-        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_4), getString(R.string.drawer_description_4), R.mipmap.ic_launcher));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_0), R.drawable.ic_waffle));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_1),R.drawable.ic_notification));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_2), R.drawable.ic_bank));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_3), R.drawable.ic_vehicle));
+        mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_4), R.drawable.ic_settings));
 
         // Initializing DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -169,12 +174,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Inner class model to populate the Drawer Items
     class DrawerItem {
         String mTitle;
-        String mSubtitle;
         int mIcon;
 
-        public DrawerItem(String title, String subtitle, int icon) {
+        public DrawerItem(String title, int icon) {
             mTitle = title;
-            mSubtitle = subtitle;
             mIcon = icon;
         }
     }
@@ -218,11 +221,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             TextView titleView = (TextView) view.findViewById(R.id.title);
-            TextView subtitleView = (TextView) view.findViewById(R.id.subTitle);
             ImageView iconView = (ImageView) view.findViewById(R.id.icon);
 
             titleView.setText(mDrawerItems.get(position).mTitle);
-            subtitleView.setText(mDrawerItems.get(position).mSubtitle);
             iconView.setImageResource(mDrawerItems.get(position).mIcon);
 
             return view;

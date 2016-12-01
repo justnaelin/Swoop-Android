@@ -71,8 +71,8 @@ public class CarpoolAdapter extends BaseAdapter {
         detailTextView.setText(carpool.getTimeStamp());
 
 
-        /* more info: https://www.raywenderlich.com/124438/android-listview-tutorial */
-        Picasso.with(mContext).load("https://s-media-cache-ak0.pinimg.com/564x/fd/0c/55/fd0c559856ca991e9e28937dc802f0b0.jpg").placeholder(R.mipmap.ic_launcher).into(thumbnailImageView);
+        // Load photo from url on another thread
+        Picasso.with(mContext).load("https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-256.png").placeholder(R.mipmap.ic_launcher).into(thumbnailImageView);
 
         return rowView;
     }
