@@ -1,6 +1,12 @@
 package com.service;
 
 import android.content.Context;
+import android.util.Log;
+
+import com.rest.UserResource;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -27,7 +33,7 @@ public class UserService {
     public static final String UPDATE_END_POINT = "http://10.0.2.2:8080/rest/user/update";
     public static final String DELETE_END_POINT = "http://10.0.2.2:8080/rest/user/delete";
     public static final String CREATE_END_POINT = "http://10.0.2.2:8080/rest/user/create";
-
+    public static  byte[] retrievedUser;
     public UserService() {
 
     }
@@ -39,8 +45,21 @@ public class UserService {
         return null;
 
     }
-    public static boolean isUser(String userId) {
+    public static boolean isUser(JSONObject userProfile) throws JSONException, InterruptedException {
 
-        return true;
+        String id =  userProfile.getString("id");
+        Log.d("USERIDDDdd:", id);
+        if(!id.isEmpty()) {
+            UserResource.retrieveRequest(id);
+            if(retrievedUser!=null) {
+                Log.d("userR not empty: ", retrievedUser.toString());
+                return true;
+            }
+            Log.d("userRetrieved is empty", "empty");
+            return false;
+
+        }
+        Log.d("userRetrieveddd", "empty");
+        return false;
     }
 }

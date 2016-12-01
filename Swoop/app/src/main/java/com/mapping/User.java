@@ -19,6 +19,9 @@ public class User {
     private List<String>  reviewIds;
     private String vehicleId;
     private String birthday;
+    public User() {
+
+    }
     public User(String userId, String firstName, String lastName, String address, String emailAddress,
                 Double averageRating, String phoneNumber, String birthday, List<String> requestedCarpoolIds, String vehicleId, List<String> reviewIds) {
         this.userId = userId;

@@ -2,7 +2,6 @@ package com.swoop.swoop.login;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,18 +14,18 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.service.UserService;
-import com.swoop.swoop.CreateUserActivity;
 import com.swoop.swoop.MainActivity;
 import com.swoop.swoop.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by anaperez on 11/4/16.
@@ -35,16 +34,11 @@ import com.swoop.swoop.R;
 public class FacebookLogin extends Activity implements View.OnClickListener {
     private CallbackManager callbackManager;
     private TextView mTextDetails;
-    private AccessTokenTracker accessTokenTracker;
+    private AccessTokenTracker mAccessTokenTracker;
     private ProfileTracker profileTracker;
     private LoginButton loginButton;
     private AccessToken accessToken;
     private Button skipLogin;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,49 +51,13 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
         skipLogin.setOnClickListener(this);
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
-                    private ProfileTracker mProfileTracker;
-
+                    //Success login in into app
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("LOGIN_SUCCESS", "Success");
                         loginButton.setVisibility(View.INVISIBLE);
                         AccessToken accessToken = loginResult.getAccessToken();
-                        //for right now this will send any user to the mainActivity without the creation of a new user.
-                        //still working on handling that part
-                        Log.d("GRANTED PERMISSIONS: ", loginResult.getRecentlyGrantedPermissions().toString());
-                        Object[] object = loginResult.getRecentlyGrantedPermissions().toArray();
-                        Log.d("OBJECT CONTENTS", object.toString());
-                    /*    if(Profile.getCurrentProfile() == null) {
-                            mProfileTracker = new ProfileTracker() {
-                                @Override
-                                protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                                    Log.d("PROFILE CHANGED: ", currentProfile.toString());
-                                    Log.d("NAME: ", currentProfile.getFirstName());
-                                    mProfileTracker.stopTracking();
-                                }
-
-                            };
-
-                        }
-                        else {
-                            Profile profile = Profile.getCurrentProfile();
-                            Log.v("facebook - profile", profile.getFirstName());
-                        } */
-                      /*  Profile profile = Profile.getCurrentProfile();
-                        Log.d("PROFILE: ", profile.toString());
-                        Log.d("NAME: ", profile.getFirstName());
-                        Log.d("LastName: ", profile.getLastName());
-                        Log.d("id: ", profile.getId());
-                        Log.d("ID:", accessToken.getUserId()); */
-                        if (UserService.isUser(accessToken.getUserId())) {
-                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                            startActivity(intent);
-                            finish();//<- IMPORTANT
-                        } else {
-                            Intent intent = new Intent(getBaseContext(), CreateUserActivity.class);
-                            startActivity(intent);
-                            finish();//<- IMPORTANT
-                        }
+                        fetchFacebookProfileInformation();
                     }
 
                     @Override
@@ -114,7 +72,7 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
                     }
                 });
 
-        accessTokenTracker = new AccessTokenTracker() {
+        mAccessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
@@ -131,9 +89,6 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
             startActivity(intent);
             finish();//<- IMPORTANT
         }
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -154,43 +109,57 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
         }
     }
 
+    /*
+     call this method from anywhere within the app to logout of the app.
+     Remember to create a new intent to FacebookLogin class.
+     */
     public static void logout() {
         LoginManager.getInstance().logOut();
     }
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
+    /*
+    this is used to fetch user's information from facebook.
      */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("FacebookLogin Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
+    private void fetchFacebookProfileInformation() {
+        GraphRequest request = GraphRequest.newMeRequest(
+                AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        // this is where you should have the profile
+                        Log.d("fetched info", object.toString());
+                        if(response != null) {
+                           // JSONObject data = response.getJSONObject();
+                            String url = null;
+                            try {
+                                url = response.getJSONObject().getJSONObject("picture")
+                                        .getJSONObject("data").getString("url");
+                                Log.d("profile pic: URLS: " , url);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        try {
+                            nextActivity(object);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        Bundle parameters = new Bundle();
+        //fields needed from facebook
+        parameters.putString("fields", "id,name,link,email,picture.type(large),phonenumber");
+        request.setParameters(parameters);
+        request.executeAsync();
+
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    private void nextActivity(JSONObject profile) throws JSONException, InterruptedException {
+        if (UserService.isUser(profile)) {
+            Log.d("TRYING TO MAKE THE CALL", profile.toString());
+        }
+        Log.d("SOMETHING BAD HAPPENED", profile.toString());
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
 }

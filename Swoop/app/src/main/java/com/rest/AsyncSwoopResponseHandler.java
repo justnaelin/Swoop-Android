@@ -14,14 +14,23 @@ import org.apache.http.Header;
 public class AsyncSwoopResponseHandler extends AsyncHttpResponseHandler{
 
 
-
+    private byte[] responseBodyResult;
     public AsyncSwoopResponseHandler(){
         super();
     }
 
     @Override
     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-        Log.d("AsyncSwoopResponse", "Response code" + statusCode + " " + new String(responseBody) + "\n");
+        Log.d("RESPONSE CODE:", String.valueOf(statusCode));
+//        Log.d("AsyncSwoopResponse", "Response code" + statusCode + " " + new String(responseBody) + "\n");
+        if(responseBody != null) {
+            Log.d("RESPONSE CODE:", String.valueOf(statusCode));
+            for (byte b : responseBodyResult = responseBody) {}
+        }
+        else{
+            Log.d("RESPONSE CODE:", String.valueOf(statusCode));
+            responseBodyResult = null;
+        }
 
     }
 
@@ -30,4 +39,8 @@ public class AsyncSwoopResponseHandler extends AsyncHttpResponseHandler{
         Log.d("AsyncSwoopResponse", "Response code" + statusCode + " " + new String(responseBody) + "\n");
 
     }
+    public byte[] returnResponse() {
+        return responseBodyResult;
+    }
+
 }
