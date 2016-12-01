@@ -19,6 +19,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
     private Button mCreateUser;
     private EditText mInputName, mInputLastName, mInputEmail, mInputAddress, mInputphoneNumber, mInputDOB;
     private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         mCreateUser = (Button) findViewById(R.id.submit_button_to_create_user);
         mCreateUser.setOnClickListener(this);
     }
+
     public boolean checkEmptyFields() {
         mInputAddress = (EditText) findViewById(R.id.input_homeAddress);
         mInputDOB = (EditText) findViewById(R.id.input_DOB);
@@ -35,30 +37,31 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         mInputName = (EditText) findViewById(R.id.input_userName);
         mInputLastName = (EditText) findViewById(R.id.input_userLastName);
         mInputphoneNumber = (EditText) findViewById(R.id.input_cellPhone);
-        if(InputUtility.isNotNull(mInputAddress.getText().toString()) &&
+        if (InputUtility.isNotNull(mInputAddress.getText().toString()) &&
                 InputUtility.isNotNull(mInputDOB.getText().toString()) &&
                 InputUtility.isNotNull(mInputEmail.getText().toString()) &&
                 InputUtility.isNotNull(mInputName.getText().toString()) &&
                 InputUtility.isNotNull(mInputLastName.getText().toString()) &&
                 InputUtility.isNotNull(mInputphoneNumber.getText().toString())) {
             return true;
-        }
-        else{
+        } else {
             createToast("Please enter all fields");
             return false;
         }
     }
+
     public void createToast(String s) {
         Toast toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
         toast.show();
     }
+
     @Override
     public void onClick(View v) {
         //check what was clicked
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.submit_button_to_create_user: {
                 Log.d("CLICKED CREATE USER", "creating user");
-                if(checkEmptyFields()) {
+                if (checkEmptyFields()) {
                     Bundle bundle = getIntent().getExtras();
                     String userId = bundle.getString("USER_ID");
                     String name = mInputName.getText().toString();

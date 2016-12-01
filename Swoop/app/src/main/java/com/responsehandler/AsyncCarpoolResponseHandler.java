@@ -1,26 +1,24 @@
-package com.rest;
+package com.responsehandler;
 
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import org.apache.http.Header;
+
 /**
- * AsyncSwoopResponseHandler
+ * AsyncCarpoolResponseHandler
  *
  * @author Yarely Chino
  * @version 1.0
  */
 
-public class AsyncSwoopResponseHandler extends AsyncHttpResponseHandler{
+public class AsyncCarpoolResponseHandler extends AsyncHttpResponseHandler{
 
-
-
-    public AsyncSwoopResponseHandler(){
-        super();
-    }
 
     @Override
     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
         Log.d("AsyncSwoopResponse", "Response code" + statusCode + " " + new String(responseBody) + "\n");
 
     }

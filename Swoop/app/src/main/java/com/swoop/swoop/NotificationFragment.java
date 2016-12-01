@@ -14,7 +14,7 @@ import android.widget.Toast;
  * @version 1.0
  */
 
-public class NotificationFragment extends Fragment implements View.OnClickListener{
+public class NotificationFragment extends Fragment implements View.OnClickListener {
 
     public NotificationFragment() {
         // Required empty public constructor

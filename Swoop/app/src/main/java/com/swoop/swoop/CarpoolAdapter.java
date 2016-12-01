@@ -12,68 +12,80 @@ import com.mapping.Carpool;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by naelin on 11/27/16.
  */
 
 public class CarpoolAdapter extends BaseAdapter {
-
     private Context mContext;
-    private LayoutInflater mInflator;
-    private ArrayList<Carpool> mDataSource;
+    private List<Carpool> mRequestedCarpools = new ArrayList<Carpool>();
 
-    public CarpoolAdapter(Context context, ArrayList<Carpool> items) {
+    public CarpoolAdapter(Context context) {
         mContext = context;
-        mDataSource = items;
-        mInflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return mDataSource.size();
+        return mRequestedCarpools.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return mDataSource.get(i);
+    public Object getItem(int position) {
+        return mRequestedCarpools.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        View rowView = mInflator.inflate(R.layout.list_item_carpool, viewGroup, false);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
+
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.list_item_carpool, null);
+        } else {
+            view = convertView;
+        }
+
 
         // Get title element
         TextView titleTextView =
-                (TextView) rowView.findViewById(com.swoop.swoop.R.id.carpool_list_title);
+                (TextView) view.findViewById(com.swoop.swoop.R.id.carpool_list_title);
 
-// Get subtitle element
+        // Get subtitle element
         TextView subtitleTextView =
-                (TextView) rowView.findViewById(com.swoop.swoop.R.id.carpool_list_subtitle);
+                (TextView) view.findViewById(com.swoop.swoop.R.id.carpool_list_subtitle);
 
-// Get detail element
+        // Get detail element
         TextView detailTextView =
-                (TextView) rowView.findViewById(com.swoop.swoop.R.id.carpool_list_detail);
+                (TextView) view.findViewById(com.swoop.swoop.R.id.carpool_list_detail);
 
-// Get thumbnail element
+        // Get thumbnail element
         ImageView thumbnailImageView =
-                (ImageView) rowView.findViewById(com.swoop.swoop.R.id.user_photo);
+                (ImageView) view.findViewById(com.swoop.swoop.R.id.user_photo);
 
-        Carpool carpool = (Carpool) getItem(i);
+        Carpool carpool = (Carpool) getItem(position);
 
         titleTextView.setText(carpool.getStartLocation());
         subtitleTextView.setText(carpool.getEndLocation());
         detailTextView.setText(carpool.getTimeStamp());
 
-
         /* more info: https://www.raywenderlich.com/124438/android-listview-tutorial */
         Picasso.with(mContext).load("https://s-media-cache-ak0.pinimg.com/564x/fd/0c/55/fd0c559856ca991e9e28937dc802f0b0.jpg").placeholder(R.mipmap.ic_launcher).into(thumbnailImageView);
 
-        return rowView;
+
+        return view;
+    }
+
+
+    public void upDateEntries(List<Carpool> entries) {
+        mRequestedCarpools = entries;
+        notifyDataSetChanged();
     }
 }
+
