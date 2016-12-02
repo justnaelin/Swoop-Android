@@ -39,6 +39,7 @@ import java.util.Locale;
  * CreateCarpoolActivity
  *
  * @author Yarely Chino
+ * @author karinapizano
  * @version 1.0
  */
 
@@ -57,6 +58,7 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
     private String mLocation;
     private String mDestination;
     private static final String TAG = "CreateCarpoolActivity";
+    private String userLocations;
 
     // Start with the RadioButtonDriver clicked
     private boolean isDriver = true;
@@ -78,6 +80,16 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
         // Set progress Dialog to False
         mProgressDialog.setMessage("Please wait...");
         mProgressDialog.setCancelable(false);
+        initializeAll();
+
+
+
+    }
+    /**
+     * Initializes all user interactive tools. (Buttons, Pickers, Locations .. )
+     */
+
+    private void initializeAll(){
 
         mSubmitButton = (Button) findViewById(R.id.submit_button);
         mButtonDatePicker = (Button) findViewById(R.id.button_date);
@@ -94,31 +106,27 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
         mButtonDatePicker.setOnClickListener(this);
         mButtonTimePicker.setOnClickListener(this);
 
+        //Get users locations.
         locationFragment = (PlaceAutocompleteFragment)getFragmentManager()
                 .findFragmentById(R.id.location_input);
-        locationFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                mLocation = place.getLatLng().toString().replace("(", "")
-                        .replace(")", "").substring(9);
-
-                Log.i(TAG, "Place:" + mLocation);
-            }
-
-            @Override
-            public void onError(Status status) {
-                Log.i(TAG, "Error occurred:" + status);
-            }
-        });
 
         destinationFragment = (PlaceAutocompleteFragment) getFragmentManager()
                 .findFragmentById(R.id.destination_input);
-        destinationFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        mLocation = getUsersLocations(locationFragment);
+        mDestination = getUsersLocations(destinationFragment);
+    }
+    /**
+     * Gets users location using the places API.
+     */
+
+    private String getUsersLocations(PlaceAutocompleteFragment fragment){
+
+        fragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                mDestination = place.getLatLng().toString().toString().replace("(", "")
+                userLocations = place.getLatLng().toString().replace("(", "")
                         .replace(")", "").substring(9);
-                Log.i(TAG, "Place:" + mDestination);
+                Log.i(TAG, "Place:" + userLocations);
             }
 
             @Override
@@ -127,7 +135,7 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
             }
         });
 
-
+        return userLocations;
     }
 
     /**
