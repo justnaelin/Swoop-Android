@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +30,10 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.common.api.Status;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * CreateCarpoolActivity
@@ -96,6 +101,7 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
             public void onPlaceSelected(Place place) {
                 mLocation = place.getLatLng().toString().replace("(", "")
                         .replace(")", "").substring(9);
+
                 Log.i(TAG, "Place:" + mLocation);
             }
 
