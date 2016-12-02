@@ -22,6 +22,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
     private Button mCreateUser;
     private EditText mInputName, mInputLastName, mInputEmail, mInputAddress, mInputphoneNumber, mInputDOB;
     private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +31,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         mProgressDialog = new ProgressDialog(this);
         mCreateUser = (Button) findViewById(R.id.submit_button_to_create_user);
         mCreateUser.setOnClickListener(this);
-        mInputAddress = (EditText) findViewById(R.id.input_homeAddress);
-        mInputDOB = (EditText) findViewById(R.id.input_DOB);
-        mInputEmail = (EditText) findViewById(R.id.input_userEmail);
-        mInputName = (EditText) findViewById(R.id.input_userName);
-        mInputLastName = (EditText) findViewById(R.id.input_userLastName);
-        mInputphoneNumber = (EditText) findViewById(R.id.input_cellPhone);
         try {
             JSONObject jsonUser = new JSONObject(getIntent().getStringExtra("JSONUserData"));
             if(jsonUser.getString("first_name") != null) {
@@ -55,8 +50,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
     public boolean checkEmptyFields() {
         if(InputUtility.isNotNull(mInputAddress.getText().toString()) &&
@@ -66,23 +59,24 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 InputUtility.isNotNull(mInputLastName.getText().toString()) &&
                 InputUtility.isNotNull(mInputphoneNumber.getText().toString())) {
             return true;
-        }
-        else{
+        } else {
             createToast("Please enter all fields");
             return false;
         }
     }
+
     public void createToast(String s) {
         Toast toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
         toast.show();
     }
+
     @Override
     public void onClick(View v) {
         //check what was clicked
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.submit_button_to_create_user: {
                 Log.d("CLICKED CREATE USER", "creating user");
-                if(checkEmptyFields()) {
+                if (checkEmptyFields()) {
                     Bundle bundle = getIntent().getExtras();
                     String userId = bundle.getString("USER_ID");
                     String name = mInputName.getText().toString();

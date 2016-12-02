@@ -1,21 +1,22 @@
-package com.rest;
+package com.responsehandler;
 
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import org.apache.http.Header;
+
 /**
- * AsyncSwoopResponseHandler
+ * AsyncCarpoolResponseHandler
  *
  * @author Yarely Chino
  * @version 1.0
  */
 
-public class AsyncSwoopResponseHandler extends AsyncHttpResponseHandler{
-
+public class AsyncCarpoolResponseHandler extends AsyncHttpResponseHandler{
 
     private byte[] responseBodyResult;
-    public AsyncSwoopResponseHandler(){
+    public AsyncCarpoolResponseHandler(){
         super();
     }
 
@@ -31,7 +32,6 @@ public class AsyncSwoopResponseHandler extends AsyncHttpResponseHandler{
             Log.d("RESPONSE CODE:", String.valueOf(statusCode));
             responseBodyResult = null;
         }
-
     }
 
     @Override
@@ -42,5 +42,4 @@ public class AsyncSwoopResponseHandler extends AsyncHttpResponseHandler{
     public byte[] returnResponse() {
         return responseBodyResult;
     }
-
 }

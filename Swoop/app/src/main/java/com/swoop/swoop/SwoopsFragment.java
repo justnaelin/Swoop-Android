@@ -14,7 +14,7 @@ import android.widget.Toast;
  * @version 1.0
  */
 
-public class SwoopsFragment extends Fragment implements View.OnClickListener{
+public class SwoopsFragment extends Fragment implements View.OnClickListener {
 
     public SwoopsFragment() {
         // Required empty public constructor
