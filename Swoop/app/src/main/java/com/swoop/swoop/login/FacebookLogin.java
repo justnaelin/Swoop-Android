@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -16,14 +15,13 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.service.UserService;
+import com.swoop.swoop.CreateUserActivity;
 import com.swoop.swoop.MainActivity;
 import com.swoop.swoop.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,12 +31,13 @@ import org.json.JSONObject;
  */
 public class FacebookLogin extends Activity implements View.OnClickListener {
     private CallbackManager callbackManager;
-    private TextView mTextDetails;
     private AccessTokenTracker mAccessTokenTracker;
-    private ProfileTracker profileTracker;
     private LoginButton loginButton;
     private AccessToken accessToken;
     private Button skipLogin;
+    private Bundle parameters;
+    private JSONObject retrievedUserData = new JSONObject();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("LOGIN_SUCCESS", "Success");
                         loginButton.setVisibility(View.INVISIBLE);
-                        AccessToken accessToken = loginResult.getAccessToken();
+                        accessToken = loginResult.getAccessToken();
                         fetchFacebookProfileInformation();
                     }
 
@@ -79,6 +78,7 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
                     AccessToken currentAccessToken) {
                 // Set the access token using
                 // currentAccessToken when it's loaded or set.
+                accessToken = currentAccessToken;
             }
         };
         // If the access token is available already assign it.
@@ -126,8 +126,10 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         // this is where you should have the profile
-                        Log.d("fetched info", object.toString());
-                        if(response != null) {
+                      //  Log.d("fetched info", response.toString());
+                        if(response != null ) {
+                            retrievedUserData = response.getJSONObject();
+                            Log.d("RESPONSE TO JSON:", retrievedUserData.toString());
                            // JSONObject data = response.getJSONObject();
                             String url = null;
                             try {
@@ -138,28 +140,45 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
                                 e.printStackTrace();
                             }
                         }
+
                         try {
-                            nextActivity(object);
+                            nextActivity(retrievedUserData);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+
                     }
                 });
-        Bundle parameters = new Bundle();
         //fields needed from facebook
-        parameters.putString("fields", "id,name,link,email,picture.type(large),phonenumber");
+        parameters = new Bundle();
+        parameters.putString("fields", "id,first_name,last_name,birthday,link,email,picture.type(large)");
         request.setParameters(parameters);
         request.executeAsync();
-
     }
 
-    private void nextActivity(JSONObject profile) throws JSONException, InterruptedException {
-        if (UserService.isUser(profile)) {
-            Log.d("TRYING TO MAKE THE CALL", profile.toString());
+    private void nextActivity(JSONObject retrievedUserData) throws JSONException, InterruptedException {
+        Log.d("HERE", "here");
+        Log.d("ACCESS TOKEN:", accessToken.toString());
+        if (UserService.isUser(this.retrievedUserData)) {
+            Log.d("TRYING TO MAKE THE CALL", this.retrievedUserData.toString());
+            if (accessToken != null) {//<- IMPORTANT
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                intent.putExtra("JSONUserData", retrievedUserData.toString());
+                startActivity(intent);
+                finish();//<- IMPORTANT
+            }
         }
-        Log.d("SOMETHING BAD HAPPENED", profile.toString());
+        else{
+            if (accessToken != null) {//<- IMPORTANT
+                Log.d("ACCESSTOKEN IS NOT NULL", accessToken.toString());
+                Intent intent = new Intent(getBaseContext(), CreateUserActivity.class);
+                intent.putExtra("JSONUserData", retrievedUserData.toString());
+                startActivity(intent);
+                finish();//<- IMPORTANT
+            }
+        }
+        Log.d("SOMETHING BAD HAPPENED", this.retrievedUserData.toString());
     }
-
 }

@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.rest.InputUtility;
 import com.service.UserService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,14 +30,35 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         mProgressDialog = new ProgressDialog(this);
         mCreateUser = (Button) findViewById(R.id.submit_button_to_create_user);
         mCreateUser.setOnClickListener(this);
-    }
-    public boolean checkEmptyFields() {
         mInputAddress = (EditText) findViewById(R.id.input_homeAddress);
         mInputDOB = (EditText) findViewById(R.id.input_DOB);
         mInputEmail = (EditText) findViewById(R.id.input_userEmail);
         mInputName = (EditText) findViewById(R.id.input_userName);
         mInputLastName = (EditText) findViewById(R.id.input_userLastName);
         mInputphoneNumber = (EditText) findViewById(R.id.input_cellPhone);
+        try {
+            JSONObject jsonUser = new JSONObject(getIntent().getStringExtra("JSONUserData"));
+            if(jsonUser.getString("first_name") != null) {
+                mInputName.setText(jsonUser.getString("first_name"));
+            }
+            if(jsonUser.getString("last_name") != null) {
+                mInputLastName.setText(jsonUser.getString("last_name"));
+            }
+            if(jsonUser.getString("email") != null) {
+                mInputEmail.setText(jsonUser.getString("email"));
+            }
+            if(jsonUser.getString("birthday") != null) {
+                mInputDOB.setText(jsonUser.getString("birthday"));
+            }
+            Log.d("Example Item: ", jsonUser.getString("last_name"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public boolean checkEmptyFields() {
         if(InputUtility.isNotNull(mInputAddress.getText().toString()) &&
                 InputUtility.isNotNull(mInputDOB.getText().toString()) &&
                 InputUtility.isNotNull(mInputEmail.getText().toString()) &&

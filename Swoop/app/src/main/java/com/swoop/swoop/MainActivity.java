@@ -18,13 +18,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-<<<<<<< HEAD
-=======
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
->>>>>>> 5c1320f1685fbeef6f3435fd8c8ff183840e732f
 import com.swoop.swoop.login.FacebookLogin;
 
 import java.util.ArrayList;
