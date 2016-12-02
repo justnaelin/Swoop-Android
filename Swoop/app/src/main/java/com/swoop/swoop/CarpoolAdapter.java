@@ -1,6 +1,7 @@
 package com.swoop.swoop;
 
 import android.content.Context;
+import android.location.Address;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mapping.Carpool;
+import com.rest.InputUtility;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -53,27 +55,29 @@ public class CarpoolAdapter extends BaseAdapter {
         }
 
 
-        // Get title element
-        TextView titleTextView =
-                (TextView) view.findViewById(com.swoop.swoop.R.id.carpool_list_title);
 
-        // Get subtitle element
-        TextView subtitleTextView =
-                (TextView) view.findViewById(com.swoop.swoop.R.id.carpool_list_subtitle);
+        // Get carpool date element
+        TextView mDate = (TextView) view.findViewById(R.id.carpool_date);
 
-        // Get detail element
-        TextView detailTextView =
-                (TextView) view.findViewById(com.swoop.swoop.R.id.carpool_list_detail);
+        // Get carpool end location element
+        TextView  mEndLocation = (TextView) view.findViewById(R.id.carpool_end_location);
+
+        // Get start location element
+        TextView  mStartLocation = (TextView) view.findViewById(R.id.carpool_start_location);
 
         // Get thumbnail element
-        ImageView thumbnailImageView =
-                (ImageView) view.findViewById(com.swoop.swoop.R.id.user_photo);
+        ImageView thumbnailImageView = (ImageView) view.findViewById(com.swoop.swoop.R.id.user_photo);
 
         Carpool carpool = (Carpool) getItem(position);
+        List<Address> startLocation = InputUtility.reverseGeo(carpool.getStartLocation(), mContext);
+        List<Address> endLocation  = InputUtility.reverseGeo(carpool.getEndLocation(), mContext);
 
-        titleTextView.setText(carpool.getStartLocation());
-        subtitleTextView.setText(carpool.getEndLocation());
-        detailTextView.setText(carpool.getTimeStamp());
+        if(startLocation != null && endLocation != null){
+            mStartLocation.setText(startLocation.get(0).getThoroughfare() +", "+  startLocation.get(0).getLocality() +", "+  startLocation.get(0).getAdminArea());
+            mEndLocation.setText(endLocation.get(0).getThoroughfare() +", "+  endLocation.get(0).getLocality() +", "+  endLocation.get(0).getAdminArea());
+        }
+
+        mDate.setText(carpool.getTimeStamp());
 
         // Load photo from url on another thread
         Picasso.with(mContext).load("https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-256.png").placeholder(R.mipmap.ic_launcher).into(thumbnailImageView);
@@ -87,5 +91,6 @@ public class CarpoolAdapter extends BaseAdapter {
         mCarpools = entries;
         notifyDataSetChanged();
     }
+
 }
 

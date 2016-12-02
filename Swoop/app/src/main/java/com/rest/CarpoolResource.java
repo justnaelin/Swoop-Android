@@ -63,6 +63,7 @@ public final class CarpoolResource {
                 }else{
                     Log.d("CarpoolResource Failure", "Response code carpool by user" + statusCode  + error.toString() + "\n");
 
+
                 }
 
             }
@@ -88,10 +89,11 @@ public final class CarpoolResource {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 if(responseBody != null){
-                    Log.d("CarpoolResource Failure", "Response code create" + statusCode +  new String(responseBody) + error.toString() + "\n");
+                    Log.d("CarpoolResource Failure", "Response code create" + statusCode + new String(responseBody) +error.toString() + "\n");
 
                 }else{
-                    Log.d("CarpoolResource Failure", "Response code create" + statusCode + error.toString() + "\n");
+                    Log.d("CarpoolResource Failure", "Response code create" + statusCode  + error.toString() + "\n");
+
 
                 }
             }
@@ -116,6 +118,7 @@ public final class CarpoolResource {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 if(responseBody != null){
+
                     Log.d("CarpoolResource Failure", "Response code execute" + statusCode + new String(responseBody) + error.toString() + "\n");
 
                 }else{
