@@ -85,8 +85,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.swoop_button:
-                Intent intent_map = new Intent(v.getContext(), CarpoolDetailPageActivity.class);
-                startActivity(intent_map);
+                fragment = new SwoopsFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.home_fragment_container, fragment)
+                        .commit();
                 break;
             case R.id.my_swoops_button:
                 fragment = new MySwoopsFragment();
