@@ -1,5 +1,13 @@
 package com.rest;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+import android.util.Log;
+
+import java.io.IOException;
+import java.util.List;
+
 /**
  * InputUtility
  *
@@ -38,6 +46,31 @@ public final class InputUtility {
      */
     public static String valueOf(Object obj) {
         return (obj == null) ? "null" : obj.toString();
+    }
+
+
+    /**
+     * reverseGeocordinates to an Address list
+     *
+     * @param //Object
+     * @return null if boolean is null, and string typecast if boolean is true or false
+     */
+    public static List<Address> reverseGeo(String mLocation, Context context){
+
+        String[] str = mLocation.split(",");
+        String lati = str[0];
+        String lngi = str[1];
+
+        Geocoder geocoder = new Geocoder(context);
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(lati), Double.parseDouble(lngi), 1);
+            return addresses;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
