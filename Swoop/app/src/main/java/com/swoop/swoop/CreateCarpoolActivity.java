@@ -112,8 +112,7 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
 
         destinationFragment = (PlaceAutocompleteFragment) getFragmentManager()
                 .findFragmentById(R.id.destination_input);
-        mLocation = getUsersLocations(locationFragment);
-        mDestination = getUsersLocations(destinationFragment);
+
     }
     /**
      * Gets users location using the places API.
@@ -144,6 +143,9 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
      * @return true if all information is not empty, false if any fields are emtpy
      */
     public boolean checkEmptyFields() {
+
+        mLocation = getUsersLocations(locationFragment);
+        mDestination = getUsersLocations(destinationFragment);
 
         mInputRate = (EditText) findViewById(R.id.input_rate);
         mInputMaxPeople = (EditText) findViewById(R.id.input_max_people);

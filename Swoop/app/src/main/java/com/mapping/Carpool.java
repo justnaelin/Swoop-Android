@@ -1,5 +1,7 @@
 package com.mapping;
 
+import java.io.Serializable;
+
 /**
  * Carpool
  *
@@ -7,7 +9,7 @@ package com.mapping;
  * @version 1.0
  */
 
-public class Carpool {
+public class Carpool implements Serializable{
 
     //TODO: create startLocation and endLocation instance variables
     private String carpoolId;

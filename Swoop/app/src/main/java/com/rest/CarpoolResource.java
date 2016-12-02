@@ -27,8 +27,56 @@ import java.util.List;
 public final class CarpoolResource {
 
     /**
-     * Handles the create carpools by user response
+     * Gets all the Carpools
      */
+
+    private static ResponseHandlerInterface retrieveAllCarpoolsResponseHandler() {
+        return new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+
+                if (statusCode == 200 && responseBody != null) {
+                    Log.d("Carpool retre success", "Response code " + statusCode + new String(responseBody) + "\n");
+
+                    //Access the Carpool Adapter Singleton Instance to update the list view
+                    CarpoolAdapterSingleton requestedCarpoolData = CarpoolAdapterSingleton.getInstance(null);
+
+                    //Converts the JSON string to a list of Carpools
+                    List<Carpool> carpoolList = new Gson().fromJson(new String(responseBody), new TypeToken<List<Carpool>>() {
+                    }.getType());
+
+                    //Singles the adapter to update the view
+                    requestedCarpoolData.updateView(carpoolList);
+                }else{
+                    Log.d("CarpoolResource success", "Response code" + statusCode + "\n");
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if(responseBody != null){
+                    Log.d("CarpoolResource Failure", "Response code carpool by user" + statusCode +  new String(responseBody) + error.toString() + "\n");
+
+                }else{
+                    Log.d("CarpoolResource Failure", "Response code carpool by user" + statusCode  + error.toString() + "\n");
+
+
+                }
+
+            }
+        };
+    }
+
+
+
+
+    /**
+         * Handles the create carpools by user response
+         */
     private static ResponseHandlerInterface retrieveCarpoolsByUserResponseHandler() {
         return new AsyncHttpResponseHandler() {
 
@@ -206,5 +254,14 @@ public final class CarpoolResource {
         client.get(CarpoolService.RETRIEVE_CREATED_CARPOOLS_BY_USER_ID, params, CarpoolResource.retrieveCarpoolsByUserResponseHandler());
     }
 
+    /**
+     * All users
+     */
+    public static void retrieveAllCarpools(){
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(CarpoolService.RETRIEVE_ALL_CARPOOLS, CarpoolResource.retrieveAllCarpoolsResponseHandler());
+
+
+    }
 
 }

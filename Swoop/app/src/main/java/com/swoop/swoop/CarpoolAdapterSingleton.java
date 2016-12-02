@@ -81,4 +81,7 @@ public class CarpoolAdapterSingleton {
         requestedCarpoolAdapterSingleton = null;
     }
 
+    public void executeAllCarpools(){
+        CarpoolService.executeAllCreatedCarpools();
+    }
 }
