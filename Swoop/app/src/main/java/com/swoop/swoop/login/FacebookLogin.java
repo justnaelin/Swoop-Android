@@ -18,10 +18,9 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.service.UserService;
-import com.swoop.swoop.CreateUserActivity;
 import com.swoop.swoop.MainActivity;
 import com.swoop.swoop.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,6 +56,9 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
                         loginButton.setVisibility(View.INVISIBLE);
                         accessToken = loginResult.getAccessToken();
                         fetchFacebookProfileInformation();
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        intent.putExtra("JSONUser", retrievedUserData.toString());
+                        startActivity(intent);
                     }
 
                     @Override
@@ -109,16 +111,15 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
         }
     }
 
-    /*
-     call this method from anywhere within the app to logout of the app.
-     Remember to create a new intent to FacebookLogin class.
+    /**
+     *
      */
     public static void logout() {
         LoginManager.getInstance().logOut();
     }
 
-    /*
-    this is used to fetch user's information from facebook.
+    /**
+     *
      */
     private void fetchFacebookProfileInformation() {
         GraphRequest request = GraphRequest.newMeRequest(
@@ -141,14 +142,6 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
                             }
                         }
 
-                        try {
-                            nextActivity(retrievedUserData);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
                     }
                 });
         //fields needed from facebook
@@ -158,10 +151,16 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
         request.executeAsync();
     }
 
-    private void nextActivity(JSONObject retrievedUserData) throws JSONException, InterruptedException {
+    /**
+     *
+     * @param retrievedUserData user information retrieved from Facebook after login
+     * @throws JSONException
+     * @throws InterruptedException
+     */
+   /* private void nextActivity(JSONObject retrievedUserData) throws JSONException, InterruptedException {
         Log.d("HERE", "here");
         Log.d("ACCESS TOKEN:", accessToken.toString());
-        if (UserService.isUser(this.retrievedUserData)) {
+        if (UserService.isUser(retrievedUserData.getString("id"))) {
             Log.d("TRYING TO MAKE THE CALL", this.retrievedUserData.toString());
             if (accessToken != null) {//<- IMPORTANT
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -180,5 +179,5 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
             }
         }
         Log.d("SOMETHING BAD HAPPENED", this.retrievedUserData.toString());
-    }
+    } */
 }

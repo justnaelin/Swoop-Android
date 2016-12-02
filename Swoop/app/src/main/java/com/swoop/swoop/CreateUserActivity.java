@@ -32,7 +32,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         mCreateUser = (Button) findViewById(R.id.submit_button_to_create_user);
         mCreateUser.setOnClickListener(this);
         try {
-            JSONObject jsonUser = new JSONObject(getIntent().getStringExtra("JSONUserData"));
+            JSONObject jsonUser = new JSONObject(getIntent().getStringExtra("JSONUser"));
             if(jsonUser.getString("first_name") != null) {
                 mInputName.setText(jsonUser.getString("first_name"));
             }
