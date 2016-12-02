@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.swoop.swoop.SwoopsFragment">
 
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="Swoops Fragment" />
+    <ListView
+        android:id="@+id/all_swoops_list"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+    </ListView>
+
 
 </FrameLayout>
