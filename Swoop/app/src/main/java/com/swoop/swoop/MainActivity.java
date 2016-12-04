@@ -18,10 +18,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
 import com.swoop.swoop.login.FacebookLogin;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -63,17 +63,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //will always initialize the first fragment to home
         initFragment(0);
         JSONObject jsonUser;
-        Bundle userBundle = null;
+       /* Bundle userBundle = null;
         try {
             jsonUser = new JSONObject(getIntent().getStringExtra("JSONUser"));
             userBundle.putString("USER", jsonUser.toString());
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-        UserSingleton.destroySingleton();
+        } */
+      /*  UserSingleton.destroySingleton();
         // Instantiate and execute data retrieval using singleton
         UserSingleton retrievedUserBySingleton = UserSingleton.getInstance(getBaseContext(), userBundle);
-        retrievedUserBySingleton.executeVerifyUser();
+        retrievedUserBySingleton.executeVerifyUser(); */
 
 
     }
