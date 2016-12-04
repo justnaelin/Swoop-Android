@@ -41,6 +41,7 @@ public class CarpoolService {
     public static final String DELETE_END_POINT = "http://10.0.2.2:8080/rest/carpool/delete";
     public static final String RETRIEVE_CREATED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/carpool/retrieve/userId";
     public static final String RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/carpool/retrieve/userId2";
+    public static final String RETRIEVE_ALL_CARPOOLS = "http://10.0.2.2:8080/rest/carpool/retrieve/all";
     public static final String VALID = "VALID";
     public static final String USER_TEMP_ID = "Ux000000001";
 
@@ -161,5 +162,8 @@ public class CarpoolService {
         params.put(USER_ID, id);
 
         CarpoolResource.retrieveCreatedByUser(params);
+    }
+    public static void executeAllCreatedCarpools(){
+        CarpoolResource.retrieveAllCarpools();
     }
 }
