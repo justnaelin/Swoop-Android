@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private ImageView mProfilePhotoImageView;
     private ImageView mRatingImageView;
     private TextView mRatingTextView;
+    private TextView mPhoneNumberTextView;
+    private TextView mEmailTextView;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -46,6 +49,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         mProfilePhotoImageView = (ImageView) view.findViewById(R.id.profile_image);
         mRatingImageView = (ImageView) view.findViewById(R.id.ratings_image_view);
         mRatingTextView = (TextView) view.findViewById(R.id.rating_text_view);
+        mPhoneNumberTextView = (TextView) view.findViewById(R.id.phone_number_text_view);
+        mEmailTextView = (TextView) view.findViewById(R.id.email_text_view);
         populateViews(view);
 
         return view;
@@ -67,13 +72,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    // TODO: Pull data from Facebook
     public void populateViews(View view) {
-        mFullNameTextView.setText("Naelin Aquino");
-        mRatingTextView.setText("5.0");
 
-        Picasso.with(view.getContext()).load("https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-256.png").placeholder(R.mipmap.ic_launcher).into(mProfilePhotoImageView);
 
+        if(UserSingleton.getInstance() != null) {
+            mFullNameTextView.setText(UserSingleton.firstName + " " + UserSingleton.lastName);
+            mRatingTextView.setText(String.valueOf(UserSingleton.averageRating));
+            mPhoneNumberTextView.setText(UserSingleton.phoneNumber);
+            Log.d("ProfileFragment", UserSingleton.phoneNumber.toString());
+            mEmailTextView.setText(UserSingleton.emailAddress);
+
+            Log.d("ProfileFragment", UserSingleton.photoUrl.toString());
+            Picasso.with(view.getContext()).load(UserSingleton.photoUrl).placeholder(R.mipmap.ic_launcher).into(mProfilePhotoImageView);
+        }
     }
 
 }

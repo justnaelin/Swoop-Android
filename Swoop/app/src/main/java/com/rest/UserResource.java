@@ -6,10 +6,13 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.ResponseHandlerInterface;
+import com.mapping.User;
 import com.service.UserService;
 import com.swoop.swoop.UserSingleton;
 
 import org.apache.http.Header;
+import org.json.JSONException;
+
 /**
  * UserResource
  *
@@ -66,6 +69,16 @@ public final class UserResource {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 200 && responseBody != null) {
                     Log.d("UserResource success", "Response code" + statusCode + new String(responseBody) + "\n");
+
+                    User newUser = new User();
+                    try {
+                        newUser = new User(new String(responseBody));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    UserSingleton userSingleton = UserSingleton.getInstance(newUser);
+                    userSingleton.launchMainActivity();
 
                 }else{
                     Log.d("User success null", "Response code" + statusCode + "\n");

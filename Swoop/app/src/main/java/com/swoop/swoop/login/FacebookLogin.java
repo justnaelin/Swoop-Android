@@ -18,78 +18,105 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.swoop.swoop.MainActivity;
 import com.swoop.swoop.R;
+import com.swoop.swoop.UserSingleton;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Created by anaperez on 11/4/16.
  * Summary: Authentication for swoop users to login with Facebook.
  */
-public class FacebookLogin extends Activity implements View.OnClickListener {
+public class FacebookLogin extends Activity {
     private CallbackManager callbackManager;
     private AccessTokenTracker mAccessTokenTracker;
     private LoginButton loginButton;
-    private AccessToken accessToken;
+    private static AccessToken accessToken;
     private Button skipLogin;
     private Bundle parameters;
     private JSONObject retrievedUserData = new JSONObject();
 
+    /**
+     *
+     */
+    public static void logout() {
+        LoginManager.getInstance().logOut();
+    }
 
+    public static boolean isLoggedIn() {
+        if (accessToken != null)
+            return true;
+        return false;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("FacebookLogin", "Start");
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.facebook_login_activity);
+
         loginButton = (LoginButton) findViewById(R.id.login_button);
+
         callbackManager = CallbackManager.Factory.create();
-        skipLogin = (Button) findViewById(R.id.skipLogin);
-        skipLogin.setOnClickListener(this);
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    //Success login in into app
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Log.d("LOGIN_SUCCESS", "Success");
-                        loginButton.setVisibility(View.INVISIBLE);
-                        accessToken = loginResult.getAccessToken();
-                        fetchFacebookProfileInformation();
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        intent.putExtra("JSONUser", retrievedUserData.toString());
-                        startActivity(intent);
-                    }
 
-                    @Override
-                    public void onCancel() {
-                        // App
-                        Log.d("CANCEL", "cancelled logging in into app");
-                    }
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        Log.d("ERROR onERROR:", exception.getStackTrace().toString());
-                    }
-                });
+            LoginManager.getInstance().registerCallback(callbackManager,
+                    new FacebookCallback<LoginResult>() {
+                        //Success login in into app
+                        @Override
+                        public void onSuccess(LoginResult loginResult) {
+                            loginButton.setVisibility(View.INVISIBLE);
 
-        mAccessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(
-                    AccessToken oldAccessToken,
-                    AccessToken currentAccessToken) {
-                // Set the access token using
-                // currentAccessToken when it's loaded or set.
-                accessToken = currentAccessToken;
-            }
-        };
+                            accessToken = loginResult.getAccessToken();
+
+                            UserSingleton.destroySingleton();
+
+                            fetchFacebookProfileInformation();
+
+                            Log.d("LOGIN_SUCCESS", "Success");
+
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            // App
+                            Log.d("CANCEL", "cancelled logging in into app");
+                        }
+
+                        @Override
+                        public void onError(FacebookException exception) {
+                            Log.d("ERROR onERROR:", exception.getStackTrace().toString());
+                        }
+                    });
+
+
+            mAccessTokenTracker = new AccessTokenTracker() {
+
+                @Override
+                protected void onCurrentAccessTokenChanged(
+                        AccessToken oldAccessToken,
+                        AccessToken currentAccessToken) {
+                    Log.d("AccessTokenTracker", "here");
+
+                    // Set the access token using
+                    // currentAccessToken when it's loaded or set.
+                    accessToken = currentAccessToken;
+                }
+
+            };
+
+
+
         // If the access token is available already assign it.
         accessToken = AccessToken.getCurrentAccessToken();
         // If already logged in show the home view
         if (accessToken != null) {//<- IMPORTANT
-            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-            startActivity(intent);
-            finish();//<- IMPORTANT
+
+            Log.d("accessToken != null", "here");
+            UserSingleton.destroySingleton();
+
+            fetchFacebookProfileInformation();
+
         }
     }
 
@@ -97,25 +124,6 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.skipLogin:
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     *
-     */
-    public static void logout() {
-        LoginManager.getInstance().logOut();
     }
 
     /**
@@ -127,19 +135,18 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         // this is where you should have the profile
-                      //  Log.d("fetched info", response.toString());
-                        if(response != null ) {
+                        //  Log.d("fetched info", response.toString());
+                        if (response != null) {
                             retrievedUserData = response.getJSONObject();
-                            Log.d("RESPONSE TO JSON:", retrievedUserData.toString());
-                           // JSONObject data = response.getJSONObject();
-                            String url = null;
-                            try {
-                                url = response.getJSONObject().getJSONObject("picture")
-                                        .getJSONObject("data").getString("url");
-                                Log.d("profile pic: URLS: " , url);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            Log.d("RESPONSE TO JSON:", response.toString());
+
+                            // Instntiate and execute data retrieval using singleton
+                            UserSingleton retrievedUserBySingleton = UserSingleton.getInstance(getBaseContext(), retrievedUserData);
+
+                            retrievedUserBySingleton.executeVerifyUser();
+
+                            finish();
+
                         }
 
                     }
@@ -151,33 +158,4 @@ public class FacebookLogin extends Activity implements View.OnClickListener {
         request.executeAsync();
     }
 
-    /**
-     *
-     * @param retrievedUserData user information retrieved from Facebook after login
-     * @throws JSONException
-     * @throws InterruptedException
-     */
-   /* private void nextActivity(JSONObject retrievedUserData) throws JSONException, InterruptedException {
-        Log.d("HERE", "here");
-        Log.d("ACCESS TOKEN:", accessToken.toString());
-        if (UserService.isUser(retrievedUserData.getString("id"))) {
-            Log.d("TRYING TO MAKE THE CALL", this.retrievedUserData.toString());
-            if (accessToken != null) {//<- IMPORTANT
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.putExtra("JSONUserData", retrievedUserData.toString());
-                startActivity(intent);
-                finish();//<- IMPORTANT
-            }
-        }
-        else{
-            if (accessToken != null) {//<- IMPORTANT
-                Log.d("ACCESSTOKEN IS NOT NULL", accessToken.toString());
-                Intent intent = new Intent(getBaseContext(), CreateUserActivity.class);
-                intent.putExtra("JSONUserData", retrievedUserData.toString());
-                startActivity(intent);
-                finish();//<- IMPORTANT
-            }
-        }
-        Log.d("SOMETHING BAD HAPPENED", this.retrievedUserData.toString());
-    } */
 }

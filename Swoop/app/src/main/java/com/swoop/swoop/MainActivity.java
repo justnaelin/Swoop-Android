@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,6 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.swoop.swoop.login.FacebookLogin;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -35,9 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Fragment fragment;
     private RelativeLayout mProfilePanel;
     private ImageView mAvatarImageView;
+    private TextView mUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("MainActivity", "Start");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -57,23 +58,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        if(!FacebookLogin.isLoggedIn()) {
+            Bundle userObject = getIntent().getExtras();
+            Log.d("USEROBJECT: ", userObject.get("JSONUser").toString());
+        }
         //initialize the first fragment display
         fragment = new HomeFragment();
 
         //will always initialize the first fragment to home
         initFragment(0);
-        JSONObject jsonUser;
-       /* Bundle userBundle = null;
-        try {
-            jsonUser = new JSONObject(getIntent().getStringExtra("JSONUser"));
-            userBundle.putString("USER", jsonUser.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } */
-      /*  UserSingleton.destroySingleton();
-        // Instantiate and execute data retrieval using singleton
-        UserSingleton retrievedUserBySingleton = UserSingleton.getInstance(getBaseContext(), userBundle);
-        retrievedUserBySingleton.executeVerifyUser(); */
+
 
 
     }
@@ -83,7 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mProfilePanel = (RelativeLayout) findViewById(R.id.relative_layout_in_drawer);
         mProfilePanel.setOnClickListener(this);
         mAvatarImageView = (ImageView)findViewById(R.id.avatar);
-        Picasso.with(this).load("https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-256.png").placeholder(R.mipmap.ic_launcher).into(mAvatarImageView);
+        mUserName = (TextView) findViewById(R.id.user_name);
+        if(UserSingleton.getInstance() != null) {
+            mUserName.setText(UserSingleton.firstName + " " + UserSingleton.lastName);
+            Picasso.with(this).load(UserSingleton.photoUrl).placeholder(R.mipmap.ic_launcher).into(mAvatarImageView);
+        }
 
         //All Drawer Navigation Items initialized
         mDrawerItems.add(new DrawerItem(getString(R.string.drawer_title_0), R.drawable.ic_waffle));

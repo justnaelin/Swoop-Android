@@ -22,7 +22,7 @@
 
 
     <!--Drawer Layout-->
-    <string name="text_edit_profile">Edit Profile</string>
+    <string name="view_profile">View Profile</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
