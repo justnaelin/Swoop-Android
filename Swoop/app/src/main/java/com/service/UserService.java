@@ -41,6 +41,7 @@ public class UserService {
                                         List<String> reviewIds, Context context) {
 
         String validateResponse = validateCreate(userId, name, lastName, email, phoneNumber, address, birthday);
+
         if(validateResponse.equals(VALID)) {
             RequestParams params = new RequestParams();
             params.put(USER_ID, userId);

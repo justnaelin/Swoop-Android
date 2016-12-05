@@ -1,5 +1,10 @@
 package com.mapping;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,12 +21,35 @@ public class User {
     private double averageRating;
     private String phoneNumber;
     private List<String> requestedCarpoolIds;
-    private List<String>  reviewIds;
+    private List<String> reviewIds;
     private String vehicleId;
     private String birthday;
+
     public User() {
 
     }
+
+    public User(String responseBody) throws JSONException {
+        JSONObject userJson = new JSONObject(responseBody);
+        userId = userJson.getString("userId");
+        firstName = userJson.getString("firstName");
+        lastName = userJson.getString("lastName");
+        emailAddress = userJson.getString("emailAddress");
+
+        reviewIds = new ArrayList<>();
+        JSONArray reviewIdsJson = userJson.getJSONArray("reviewIds");
+        for (int i = 0; i < reviewIdsJson.length(); i++) {
+            reviewIds.add(reviewIdsJson.get(i).toString());
+        }
+
+        vehicleId = userJson.getString("vehicleId");
+        birthday = userJson.getString("birthday");
+        address = userJson.getString("address");
+        phoneNumber = userJson.getString("phoneNumber");
+
+
+    }
+
     public User(String userId, String firstName, String lastName, String address, String emailAddress,
                 Double averageRating, String phoneNumber, String birthday, List<String> requestedCarpoolIds, String vehicleId, List<String> reviewIds) {
         this.userId = userId;
@@ -37,39 +65,82 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setUserId(String userId) {this.userId = userId;}
-    public String getUserId() {return userId;}
+    public String getUserId() {
+        return userId;
+    }
 
-    public void setName(String name) {this.firstName = name;}
-    public String getName() {return firstName;}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-    public void setLastName(String lastName) {this.lastName = lastName;}
-    public String getLastName() {return lastName; }
+    public String getName() {
+        return firstName;
+    }
 
-    public void emailAddress(String emailAddress) {this.emailAddress = emailAddress;}
-    public String getEmailAddress() {return emailAddress;}
+    public void setName(String name) {
+        this.firstName = name;
+    }
 
-    public void setAverageRating(double averageRating) {this.averageRating = averageRating;}
-    public double getAverageRating() {return averageRating;}
+    public String getLastName() {
+        return lastName;
+    }
 
-    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
-    public String getPhoneNumber() {return phoneNumber;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public void setBirthday(String birthday) {this.birthday = birthday;}
-    public String getBirthday() {return birthday;}
+    public void emailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @Override
     public String toString() {
-        return  "userID: " + userId + "\n"
+        return "userID: " + userId + "\n"
                 + "name: " + firstName + String.format("\nAverageRating: %s", averageRating) + "\n"
                 + "lastName: " + lastName + "\n"
-                + "phoneNumber: "  + phoneNumber + "\n"
+                + "phoneNumber: " + phoneNumber + "\n"
                 + "emailAddress: " + emailAddress + "\n"
                 + "requestedCarpoolIDS: " + requestedCarpoolIds + "\n"
-                + "reviewIds: "  + reviewIds + "\n"
+                + "reviewIds: " + reviewIds + "\n"
                 + "vehicleID: " + vehicleId + "\n"
-                + "address: "  + address + "\n"
-                + "birthday: " + birthday +"\n";
+                + "address: " + address + "\n"
+                + "birthday: " + birthday + "\n";
     }
 
     public List<String> getRequestedCarpoolIds() {
