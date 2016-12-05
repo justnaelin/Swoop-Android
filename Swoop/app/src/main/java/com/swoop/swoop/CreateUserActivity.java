@@ -12,12 +12,9 @@ import android.widget.Toast;
 import com.rest.InputUtility;
 import com.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener {
     private Button mCreateUser;
-    private EditText mInputName, mInputLastName, mInputEmail, mInputAddress, mInputphoneNumber, mInputDOB;
+    private EditText mInputName, mInputLastName, mInputEmail, mInputAddress, mInputPhoneNumber, mInputDOB;
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -25,24 +22,33 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
         setTitle(getString(R.string.title_activity_create_user));
+
         mProgressDialog = new ProgressDialog(this);
         mCreateUser = (Button) findViewById(R.id.submit_button_to_create_user);
         mCreateUser.setOnClickListener(this);
-    }
 
-    public boolean checkEmptyFields() {
-        mInputAddress = (EditText) findViewById(R.id.input_homeAddress);
-        mInputDOB = (EditText) findViewById(R.id.input_DOB);
-        mInputEmail = (EditText) findViewById(R.id.input_userEmail);
         mInputName = (EditText) findViewById(R.id.input_userName);
         mInputLastName = (EditText) findViewById(R.id.input_userLastName);
-        mInputphoneNumber = (EditText) findViewById(R.id.input_cellPhone);
-        if (InputUtility.isNotNull(mInputAddress.getText().toString()) &&
+        mInputEmail = (EditText) findViewById(R.id.input_userEmail);
+        mInputDOB = (EditText) findViewById(R.id.input_DOB);
+        mInputPhoneNumber = (EditText) findViewById(R.id.input_cellPhone);
+        mInputAddress = (EditText) findViewById(R.id.input_homeAddress);
+
+        if(UserSingleton.getInstance() != null) {
+            mInputName.setText(UserSingleton.firstName);
+            mInputLastName.setText(UserSingleton.lastName);
+            mInputEmail.setText(UserSingleton.emailAddress);
+            mInputDOB.setText(UserSingleton.birthday);
+        }
+
+    }
+    public boolean checkEmptyFields() {
+        if(InputUtility.isNotNull(mInputAddress.getText().toString()) &&
                 InputUtility.isNotNull(mInputDOB.getText().toString()) &&
                 InputUtility.isNotNull(mInputEmail.getText().toString()) &&
                 InputUtility.isNotNull(mInputName.getText().toString()) &&
                 InputUtility.isNotNull(mInputLastName.getText().toString()) &&
-                InputUtility.isNotNull(mInputphoneNumber.getText().toString())) {
+                InputUtility.isNotNull(mInputPhoneNumber.getText().toString())) {
             return true;
         } else {
             createToast("Please enter all fields");
@@ -62,23 +68,24 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             case R.id.submit_button_to_create_user: {
                 Log.d("CLICKED CREATE USER", "creating user");
                 if (checkEmptyFields()) {
-                    Bundle bundle = getIntent().getExtras();
-                    String userId = bundle.getString("USER_ID");
+
                     String name = mInputName.getText().toString();
                     String lastName = mInputLastName.getText().toString();
                     String email = mInputEmail.getText().toString();
-                    String phoneNumber = mInputphoneNumber.getText().toString();
+                    String phoneNumber = mInputPhoneNumber.getText().toString();
                     String address = mInputAddress.getText().toString();
                     String birthday = mInputDOB.getText().toString();
+
                     double averageRating = 0;
-                    String vehicleId = "";
-                    List<String> requestedCarpoolIds = new ArrayList<String>();
-                    requestedCarpoolIds.add(0, "null");
-                    List<String> reviewIds = new ArrayList<String>();
-                    reviewIds.add(0, "null");
+//                    String vehicleId = "";
+//                    List<String> requestedCarpoolIds = new ArrayList<String>();
+//                    requestedCarpoolIds.add(0, "null");
+//                    List<String> reviewIds = new ArrayList<String>();
+//                    reviewIds.add(0, "null");
+
                     //CREATE USER , vehicleId, requestedCarpoolIds, reviewIds
-                    String response = UserService.verifyCreateUser(userId, name, lastName,
-                            email, phoneNumber, address, birthday, averageRating, vehicleId, requestedCarpoolIds, reviewIds, getBaseContext());
+                    String response = UserService.verifyCreateUser(UserSingleton.userId, name, lastName,
+                            email, phoneNumber, address, birthday, averageRating, null, null, null, getBaseContext());
                 }
             }
         }

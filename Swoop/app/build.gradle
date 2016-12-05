@@ -88,6 +88,8 @@ dependencies {
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.0'
 
+    compile 'com.google.android.gms:play-services-appindexing:9.0.0'
+
     //Async Http Client library
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 
