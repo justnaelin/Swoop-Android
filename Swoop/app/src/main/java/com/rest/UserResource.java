@@ -82,7 +82,15 @@ public final class UserResource {
 
                 }else{
                     Log.d("User success null", "Response code" + statusCode + "\n");
-                    UserSingleton userSingleton = UserSingleton.getInstance(null, null);
+
+                    User newUser = new User();
+                    try {
+                        newUser = new User(new String(responseBody));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    UserSingleton userSingleton = UserSingleton.getInstance(newUser);
                     userSingleton.launchCreateUserActivity();
                 }
             }
