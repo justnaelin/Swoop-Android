@@ -9,6 +9,7 @@ import com.rest.InputUtility;
 import com.loopj.android.http.RequestParams;
 import com.mapping.Carpool;
 import com.mapping.CarpoolStatus;
+import com.swoop.swoop.UserSingleton;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,6 @@ public class CarpoolService {
     public static final String RETRIEVE_REQUESTED_CARPOOLS_BY_USER_ID = "http://10.0.2.2:8080/rest/carpool/retrieve/userId2";
     public static final String RETRIEVE_ALL_CARPOOLS = "http://10.0.2.2:8080/rest/carpool/retrieve/all";
     public static final String VALID = "VALID";
-    public static final String USER_TEMP_ID = "Ux000000001";
 
 
     public static boolean createCarpool(Carpool carpool) {
@@ -99,7 +99,7 @@ public class CarpoolService {
         if (validateResponse.equals(VALID)) {
 
             RequestParams params = new RequestParams();
-            params.put(USER_ID, USER_TEMP_ID);
+            params.put(USER_ID, UserSingleton.userId);
             params.put(START_LOCATION, startLocation);
             params.put(END_LOCATION, endLocation);
             params.put(REQUEST_DATE, requestDate);

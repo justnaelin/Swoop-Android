@@ -47,7 +47,7 @@ public class CarpoolAdapterSingleton {
         /*
         TODO: need to retrieve unique user id using the Facebook login
         */
-        CarpoolService.executeCreatedCarpoolByUser(CarpoolService.USER_TEMP_ID);
+        CarpoolService.executeCreatedCarpoolByUser(UserSingleton.userId);
     }
 
     /**
@@ -57,7 +57,7 @@ public class CarpoolAdapterSingleton {
         /*
         TODO: need to retrieve unique user id using the Facebook login
         */
-        CarpoolService.executeRequestedCarpoolByUser(CarpoolService.USER_TEMP_ID);
+        CarpoolService.executeRequestedCarpoolByUser(UserSingleton.userId);
     }
 
 

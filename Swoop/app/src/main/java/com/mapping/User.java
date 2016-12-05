@@ -36,17 +36,28 @@ public class User {
         lastName = userJson.getString("lastName");
         emailAddress = userJson.getString("emailAddress");
 
-        reviewIds = new ArrayList<>();
-        JSONArray reviewIdsJson = userJson.getJSONArray("reviewIds");
-        for (int i = 0; i < reviewIdsJson.length(); i++) {
-            reviewIds.add(reviewIdsJson.get(i).toString());
+        if(userJson.has("reviewIds")) {
+            reviewIds = new ArrayList<>();
+            JSONArray reviewIdsJson = userJson.getJSONArray("reviewIds");
+            for (int i = 0; i < reviewIdsJson.length(); i++) {
+                reviewIds.add(reviewIdsJson.get(i).toString());
+            }
+        }
+        if(userJson.has("vehicleId")) {
+            vehicleId = userJson.getString("vehicleId");
         }
 
-        vehicleId = userJson.getString("vehicleId");
+        if(userJson.has("requestedCarpoolIds")) {
+            requestedCarpoolIds = new ArrayList<>();
+            JSONArray requestedCarpoolIdsJson = userJson.getJSONArray("requestedCarpoolIds");
+            for (int i = 0; i < requestedCarpoolIdsJson.length(); i++) {
+                reviewIds.add(requestedCarpoolIdsJson.get(i).toString());
+            }
+        }
+
         birthday = userJson.getString("birthday");
         address = userJson.getString("address");
         phoneNumber = userJson.getString("phoneNumber");
-
 
     }
 
@@ -136,7 +147,7 @@ public class User {
                 + "lastName: " + lastName + "\n"
                 + "phoneNumber: " + phoneNumber + "\n"
                 + "emailAddress: " + emailAddress + "\n"
-                + "requestedCarpoolIDS: " + requestedCarpoolIds + "\n"
+                + "requestedCarpoolIds: " + requestedCarpoolIds + "\n"
                 + "reviewIds: " + reviewIds + "\n"
                 + "vehicleID: " + vehicleId + "\n"
                 + "address: " + address + "\n"

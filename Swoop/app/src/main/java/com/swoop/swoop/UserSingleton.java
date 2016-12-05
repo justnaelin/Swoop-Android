@@ -98,6 +98,7 @@ public class UserSingleton {
 
     public void launchCreateUserActivity() {
         Intent createUserActivity = new Intent(nextActivity, CreateUserActivity.class);
+        createUserActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         nextActivity.startActivity(createUserActivity);
     }
 
@@ -140,6 +141,7 @@ public class UserSingleton {
 
     public void launchMainActivity() {
         Intent mainActivity = new Intent(nextActivity, MainActivity.class);
+        mainActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         nextActivity.startActivity(mainActivity);
     }
 }
