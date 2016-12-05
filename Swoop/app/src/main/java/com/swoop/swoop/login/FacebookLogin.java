@@ -42,8 +42,8 @@ public class FacebookLogin extends Activity implements View.OnClickListener{
         setContentView(com.swoop.swoop.R.layout.facebook_login_activity);
         loginButton = (LoginButton) findViewById(com.swoop.swoop.R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
-        skipLogin = (Button) findViewById(com.swoop.swoop.R.id.skipLogin);
-        skipLogin.setOnClickListener(this);
+      //  skipLogin = (Button) findViewById(com.swoop.swoop.R.id.skipLogin);
+       // skipLogin.setOnClickListener(this);
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -101,6 +101,7 @@ public class FacebookLogin extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v){
+        /*
         switch(v.getId()){
             case com.swoop.swoop.R.id.skipLogin:
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -109,5 +110,6 @@ public class FacebookLogin extends Activity implements View.OnClickListener{
             default:
                 break;
         }
+        */
     }
 }

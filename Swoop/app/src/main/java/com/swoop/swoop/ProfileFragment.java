@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Pull data from Facebook
     public void populateViews(View view) {
-        mFullNameTextView.setText("Naelin Aquino");
+        mFullNameTextView.setText("Yareli Chino");
         mRatingTextView.setText("5.0");
 
         Picasso.with(view.getContext()).load("https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-256.png").placeholder(R.mipmap.ic_launcher).into(mProfilePhotoImageView);

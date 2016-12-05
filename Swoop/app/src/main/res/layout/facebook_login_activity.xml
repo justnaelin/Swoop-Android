@@ -18,11 +18,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp" />
-
+<!--
     <Button
         android:id="@+id/skipLogin"
         android:text="MENU"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+-->
 </LinearLayout>
