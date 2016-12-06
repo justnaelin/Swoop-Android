@@ -9,6 +9,7 @@ general:
 test:
    override:
     - ./gradlew assembleDebug
+    - ./gradlew build
     - cp ./app/build/outputs/apk/app-debug.apk $CIRCLE_ARTIFACTS/
     - cp ./*/build/test-results/debug/*.xml $CIRCLE_TEST_REPORTS/
     - bash <(curl -s https://codecov.io/bash) -t c8410632-72ea-4956-a48a-3e755d9e929f
