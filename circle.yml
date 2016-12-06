@@ -8,8 +8,10 @@ general:
     - "build/generated/*.apk"
 test:
    override:
+   
     - ./gradlew assembleDebug
     - ./gradlew build
+    - ./gradlew testDebug jacocoReport
     - cp -v ./*/app/build/outputs/apk/app-debug.apk $CIRCLE_ARTIFACTS/
     - cp -v ./*/build/test-results/debug/*.xml $CIRCLE_TEST_REPORTS/reports
     - cp ./*/build/;bash <(curl -s https://codecov.io/bash) -t c8410632-72ea-4956-a48a-3e755d9e929f
@@ -17,7 +19,6 @@ test:
    post:
     - mkdir -v $CIRCLE_TEST_REPORTS/reports
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/reports/ \;
-    - ./gradlew jacocoReport
     -  cp ./*/build/;bash <(curl -s https://codecov.io/bash) -t c8410632-72ea-4956-a48a-3e755d9e929f
 notify:
   webhooks:
