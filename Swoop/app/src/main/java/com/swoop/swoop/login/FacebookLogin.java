@@ -74,7 +74,6 @@ public class FacebookLogin extends Activity {
                             fetchFacebookProfileInformation();
 
                             Log.d("LOGIN_SUCCESS", "Success");
-
                         }
 
                         @Override
@@ -125,6 +124,7 @@ public class FacebookLogin extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
 
     /**
      *

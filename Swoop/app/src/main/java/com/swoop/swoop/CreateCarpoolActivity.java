@@ -112,7 +112,8 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
 
         destinationFragment = (PlaceAutocompleteFragment) getFragmentManager()
                 .findFragmentById(R.id.destination_input);
-
+        mLocation = getUsersLocations(locationFragment);
+        mDestination = getUsersLocations(destinationFragment);
     }
     /**
      * Gets users location using the places API.
@@ -155,11 +156,17 @@ public class CreateCarpoolActivity extends AppCompatActivity implements View.OnC
                 mLocation != null &&
                 mDestination != null &&
                 InputUtility.isNotNull(mInputRate.getText().toString()) &&
-                InputUtility.isNotNull(mInputMaxPeople.getText().toString()) &&
-                InputUtility.isNotNegative(mInputRate.getText().toString()) &&
-                InputUtility.isNotNegative(mInputMaxPeople.getText().toString())) {
+                InputUtility.isNotNull(mInputMaxPeople.getText().toString())) {
             return true;
         } else {
+            Log.d("checkEmpty", "Mlocation" + mLocation);
+            Log.d("checkEmpty", "MDestination" + mDestination);
+            Log.d("checkEmpty", "mInputRate" + mInputRate.getText().toString());
+            Log.d("checkEmpty", "mInputMaxPeople" + mInputMaxPeople.getText().toString());
+            Log.d("checkEmpty", "mTxtDate" + mTxtDate.getText().toString());
+            Log.d("checkEmpty", "mTxtTime" + mTxtTime.getText().toString());
+
+
 
             createToast("Please enter all fields");
             return false;

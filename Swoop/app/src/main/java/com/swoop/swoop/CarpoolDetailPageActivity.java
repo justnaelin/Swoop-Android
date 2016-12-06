@@ -12,6 +12,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.rest.InputUtility;
 
 import org.w3c.dom.Text;
 
@@ -38,6 +39,7 @@ public class CarpoolDetailPageActivity extends FragmentActivity implements OnMap
 
         Log.i("SEATS", String.valueOf((int)c.getNumberOfPassengers()));
 
+        //String start= InputUtility.reverseGeo(c.getStartLocation(), getApplicationContext());
         mTextViewLocation.setText(c.getStartLocation());
         mTextViewDestination.setText(c.getEndLocation());
         mTextViewName.setText("User name");

@@ -39,9 +39,9 @@ public class MySwoopsFragment extends Fragment implements View.OnClickListener {
 
         CarpoolAdapterSingleton.destroySingleton();
 
-        // Instantiate and execute data retrieval using singleton
-        //CarpoolAdapterSingleton requestedCarpoolData = CarpoolAdapterSingleton.getInstance(adapter);
-        //requestedCarpoolData.executeCreatedCarpoolByUser();
+       // Instantiate and execute data retrieval using singleton
+        CarpoolAdapterSingleton requestedCarpoolData = CarpoolAdapterSingleton.getInstance(adapter);
+        requestedCarpoolData.executeCreatedCarpoolByUser();
 
 
         return view;
